@@ -1,0 +1,22 @@
+:host{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+mat-drawer{
+    width: 300px;
+}
+mat-drawer-container{
+    height: 100%;
+}
+.login-card{
+    // width: 300px;
+    // position: relative;
+    // left: 20%;
+    // top: 20%;
+    // right: 20%;
+    // display: flex;
+//   height: 100%;
+  align-items: center;
+  justify-content: center;
+}

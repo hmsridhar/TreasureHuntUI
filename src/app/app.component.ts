@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'TreasureHunt';
+
+  sideBarOpened = false;
+
+  constructor(){}
+
+  toggleSideBar(event: any){
+    if(event.type == "sideBarEvent"){
+      this.sideBarOpened = ! this.sideBarOpened;
+    }
+  }
 }
