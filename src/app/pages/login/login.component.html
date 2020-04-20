@@ -1,0 +1,23 @@
+<h1></h1>
+<h1></h1>
+<br><br><br><br><br><br>
+<div class="mat-elevation-z8 login-card">
+    <mat-card>
+      <mat-card-title>Login</mat-card-title>
+      <mat-card-content>
+        <mat-form-field appearance="standard">
+            <mat-label>Username</mat-label>
+            <mat-icon matPrefix>person_outline</mat-icon>
+        <input matInput [(ngModel)]="username" placeholder="Username" required>
+        </mat-form-field><br>
+        <mat-form-field appearance="standard">
+            <mat-label>Password</mat-label>
+            <mat-icon matPrefix>vpn_key</mat-icon>
+        <input matInput [(ngModel)]="password" placeholder="Password" type="password" required>
+        </mat-form-field><br>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" (click)="loginUser()">Login</button>
+      </mat-card-actions>
+    </mat-card>
+</div>
