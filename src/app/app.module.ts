@@ -15,11 +15,22 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { QuestionComponent } from './pages/question/question.component';
+import { PuzzlesComponent } from './pages/puzzles/puzzles.component';
+import { LeaderboardComponent } from './pages/leaderboard/leaderboard.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { DefaultComponent } from './pages/default/default.component';
+import { TeamInfoComponent } from './pages/team-info/team-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    QuestionComponent,
+    PuzzlesComponent,
+    LeaderboardComponent,
+    DefaultComponent,
+    TeamInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +45,8 @@ import { HttpClientModule } from '@angular/common/http';
     MatInputModule,
     MatIconModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

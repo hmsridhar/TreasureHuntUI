@@ -1,9 +1,14 @@
 <mat-nav-list>
     <div class="profile-card">
         <div class="header">
-            <h2>Team 1</h2>
-            <h3 style="color: green; font-weight: bold;">50 points</h3>
+            <h2>{{teamName}}</h2>
+            <h3 style="color: green; font-weight: bold;">{{score}} points</h3>
         </div>
     </div>
+    <mat-divider></mat-divider>
+    <h2 matSubheader>Pages</h2>
+    <a mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/leaderboard"><mat-icon>trending_up</mat-icon>Leaderboard</a>
+    <a mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/team-info"><mat-icon>supervised_user_circle</mat-icon>Team Info</a>
+    <a mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/question"><mat-icon>question_answer</mat-icon>Today's Question</a>
+    <a mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/puzzles"><mat-icon>dashboard</mat-icon>Puzzles</a>
 </mat-nav-list>
-<mat-divider></mat-divider>

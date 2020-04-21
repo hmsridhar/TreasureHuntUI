@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
+import { userData } from './global-models';
 
 @Injectable({providedIn: 'root'})
 export class BackendServices{
@@ -12,11 +13,16 @@ export class BackendServices{
          .pipe(
              tap(response => {
                  response.headers.keys()
-                localStorage.setItem('userItem', response.headers.get('Authorization'));
+                var data = new userData(userCreds.username,response.headers.get('Authorization'),1,'Abc',20);
+                localStorage.setItem('Data', JSON.stringify(data));
                 return response;
              })
          )
         
+    }
+
+    logout(){
+        localStorage.removeItem('Data');
     }
 
 }

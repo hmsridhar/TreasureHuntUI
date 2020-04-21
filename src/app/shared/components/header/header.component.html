@@ -3,13 +3,22 @@
         <button mat-icon-button (click)="emitSideBarEvent()" *ngIf="isUserLoggedIn">
             <mat-icon>menu</mat-icon>
         </button>
-        <img class="logo" src="https://webassets.gigsky.com/wp-content/uploads/2020/03/GigSky-White-Logo-notag.png" alt="logo">
+        <a routerLink=""><img class="logo" src="https://webassets.gigsky.com/wp-content/uploads/2020/03/GigSky-White-Logo-notag.png" alt="logo"></a>
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
             <ul fxLayout="row" fxLayoutGap="20px">
                 <li *ngIf="isUserLoggedIn">
-                    <button mat-icon-button>
+                    <button mat-button [matMenuTriggerFor]="menu">
                         <mat-icon>exit_to_app</mat-icon>
                     </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item (click)="logout()">
+                            <mat-icon>exit_to_app</mat-icon>
+                            Signout
+                        </button>
+                    </mat-menu>
+                </li>
+                <li *ngIf="!isUserLoggedIn">
+                     <button mat-raised-button routerLink="/login">Login</button>
                 </li>
             </ul>
         </div>

@@ -1,7 +1,7 @@
 <app-header (sideBarEventEmitter)="toggleSideBar($event)" [isUserLoggedIn]="isUserLoggedIn"></app-header>
 <mat-drawer-container>
     <mat-drawer mode="side" [opened]="sideBarOpened">
-      <app-sidebar></app-sidebar>
+      <app-sidebar [teamName]="teamName" [score]="score"></app-sidebar>
     </mat-drawer>
     <mat-drawer-content autosize>
       <router-outlet (activate)="onActivate($event)"></router-outlet>
