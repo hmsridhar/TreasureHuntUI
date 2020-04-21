@@ -1,0 +1,11 @@
+<div mat-dialog-content>
+    <p>Type your answer in this box</p>
+    <mat-form-field>
+        <mat-label>Puzzle Answer</mat-label>
+        <input matInput [(ngModel)]="answer" required>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions>
+    <button mat-button [mat-dialog-close]="" >Close</button>
+    <button mat-button  cdkFocusInitial (click)="onClick()">Add</button>
+</div>

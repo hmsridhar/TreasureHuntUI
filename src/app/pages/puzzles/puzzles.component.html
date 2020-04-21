@@ -33,7 +33,7 @@ interval="5000"
             <img src="{{puzzle.path}}">
         </div>
         <div class="carousel-caption">
-            <button #test mat-raised-button id='{{puzzle.id}}' color="primary" (click)="submitAnswer(test)">Answer</button>
+            <button #test mat-raised-button id='{{puzzle.id}}' color="primary" (click)="openDialog(test)">Answer</button>
             <p>{{puzzle.text}}</p>
         </div>
     </ng-template>

@@ -16,12 +16,14 @@ import { MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { QuestionComponent } from './pages/question/question.component';
-import { PuzzlesComponent } from './pages/puzzles/puzzles.component';
+import { PuzzlesComponent} from './pages/puzzles/puzzles.component';
 import { LeaderboardComponent } from './pages/leaderboard/leaderboard.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { DefaultComponent } from './pages/default/default.component';
 import { TeamInfoComponent } from './pages/team-info/team-info.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AnswerPuzzleComponent  } from '../app/pages/puzzles/answer-puzzle.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PuzzlesComponent,
     LeaderboardComponent,
     DefaultComponent,
-    TeamInfoComponent
+    TeamInfoComponent,
+    AnswerPuzzleComponent
   ],
   imports: [
     BrowserModule,
@@ -49,8 +52,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     MatMenuModule,
     NgbModule,
+    MatDialogModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AnswerPuzzleComponent]
 })
 export class AppModule { }
