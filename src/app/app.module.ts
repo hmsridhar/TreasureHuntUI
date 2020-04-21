@@ -21,6 +21,7 @@ import { LeaderboardComponent } from './pages/leaderboard/leaderboard.component'
 import { MatMenuModule } from '@angular/material/menu';
 import { DefaultComponent } from './pages/default/default.component';
 import { TeamInfoComponent } from './pages/team-info/team-info.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { TeamInfoComponent } from './pages/team-info/team-info.component';
     MatIconModule,
     FormsModule,
     HttpClientModule,
-    MatMenuModule
+    MatMenuModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

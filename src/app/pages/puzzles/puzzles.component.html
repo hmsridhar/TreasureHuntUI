@@ -1,1 +1,41 @@
-<p>puzzles works!</p>
+<div class="header-title">
+  <h1>Puzzles</h1>
+  <h2>Click on the answer button to answer, You can also use arrow keys to move left and right</h2>
+</div>
+<div class="slide">
+<ngb-carousel [showNavigationArrows]="true" 
+[showNavigationIndicators]="true"
+interval="5000"
+[keyboard]="true"
+[pauseOnHover]="true"
+[wrap]="true">
+    <!-- <ng-template ngbSlide id="firstSlide">
+      <div>
+        <img src="assets/logo.png" alt="Angular Carousel 1">
+      </div>
+      <div class="carousel-caption">
+        <h3>Title Goes Here</h3>
+        <button mat-raised-button color="primar">Answer</button>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+      </div>
+    </ng-template>
+    <ng-template ngbSlide id="secondSlide">
+      <div>
+        <img src="assets/treasure-hunt.jpg" alt="Angular Carousel 2">
+      </div>
+      <div class="carousel-caption">
+        <h3>Title Goes Here</h3>
+        <p>Consectetur tortor volutpat pretium.</p>
+      </div>
+    </ng-template> -->
+    <ng-template ngbSlide *ngFor="let puzzle of puzzles">
+        <div>
+            <img src="{{puzzle.path}}">
+        </div>
+        <div class="carousel-caption">
+            <button #test mat-raised-button id='{{puzzle.id}}' color="primary" (click)="submitAnswer(test)">Answer</button>
+            <p>{{puzzle.text}}</p>
+        </div>
+    </ng-template>
+  </ngb-carousel>
+</div>

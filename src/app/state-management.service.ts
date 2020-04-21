@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 export class StateManagementService{
 
     username: string;
+    teamName: string;
     userType: string;
     teamId: number;
 
@@ -13,6 +14,10 @@ export class StateManagementService{
     public setUsername(username: string): void{ this.username = username; }   
     
     public getUsername(): string{ return this.username; }
+
+    public setTeamName(teamname: string): void{ this.teamName = teamname; }
+
+    public getTeamName(): string{ return this.teamName; }
 
     public setUsertype(userType: string): void{ this.userType = userType; }
 

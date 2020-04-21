@@ -22,6 +22,8 @@
     "@angular/platform-browser": "~10.0.0-next.0",
     "@angular/platform-browser-dynamic": "~10.0.0-next.0",
     "@angular/router": "~10.0.0-next.0",
+    "@ng-bootstrap/ng-bootstrap": "^6.0.3",
+    "bootstrap": "^4.4.1",
     "highcharts": "^8.0.4",
     "highcharts-angular": "^2.4.0",
     "rxjs": "~6.5.4",

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { StateManagementService } from './state-management.service';
+import { userData } from './global-models';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,14 @@ export class AppComponent {
   teamName: string;
   score: number;
 
-  constructor(private stateMgmtService: StateManagementService){}
+  constructor(private stateMgmtService: StateManagementService){
+    console.log('here refresh');
+    if(localStorage.getItem("Data") != undefined){
+      var data: userData = JSON.parse(localStorage.getItem('Data'));
+      this.teamName = data.teamName;
+      this.score = data.lastUpdatedScore;
+    }
+  }
 
   toggleSideBar(event: any){
     if(event.type == "sideBarEvent"){
@@ -47,6 +55,8 @@ export class AppComponent {
     console.log('init');
     if(localStorage.getItem('Data')){
       this.isUserLoggedIn = true;
+      var data: userData = JSON.parse(localStorage.getItem('Data'));
+      this.stateMgmtService.setTeamName(data.teamName);
     }
   }
 }

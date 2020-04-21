@@ -15,3 +15,15 @@ export class userData{
     }
 
 }
+
+export class PuzzleData{
+    path: string;
+    id: number;
+    text: string;
+
+constructor(path: string, id: number, text: string){
+        this.path = path;
+        this.id = id;
+        this.text = text;
+    }
+}
