@@ -1,12 +1,12 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row>
-        <button mat-icon-button (click)="emitSideBarEvent()">
+        <button mat-icon-button (click)="emitSideBarEvent()" *ngIf="isUserLoggedIn">
             <mat-icon>menu</mat-icon>
         </button>
         <img class="logo" src="https://webassets.gigsky.com/wp-content/uploads/2020/03/GigSky-White-Logo-notag.png" alt="logo">
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
             <ul fxLayout="row" fxLayoutGap="20px">
-                <li>
+                <li *ngIf="isUserLoggedIn">
                     <button mat-icon-button>
                         <mat-icon>exit_to_app</mat-icon>
                     </button>

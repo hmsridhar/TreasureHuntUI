@@ -18,11 +18,12 @@ export class LoginComponent implements OnInit {
   }
 
   loginUser(){
-    // console.log(this.username);
-    // console.log(this.password);
-    this.service.login().subscribe(response=>{
-      console.log(response);
-      console.log(response.status)
+    this.service.login({username: this.username, password: this.password}).subscribe(response=>{
+      // console.log(response);
+      // console.log(response.status);
+      if(response.status == 200){
+        this.loginEventEmitter.emit({type: 'loginEvent', username: this.username, userType: 'TEAM', teamId: 2});
+      }
     })
   }
 
