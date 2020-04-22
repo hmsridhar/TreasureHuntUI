@@ -21,10 +21,12 @@ export class LoginComponent implements OnInit {
   loginUser(){
     this.service.login({username: this.username, password: this.password}).subscribe(response=>{
       // console.log(response);
-      // console.log(response.status);
+      console.log(response.status);
       if(response.status == 200){
-        this.loginEventEmitter.emit({type: 'loginEvent', username: this.username, userType: 'TEAM', teamId: 2, teamName: 'Team 2', score : 30});
+        this.loginEventEmitter.emit({type: 'loginEvent', username: this.username, userType: 'TEAM', teamId: 2, teamName: this.username, score : 30});
         this.router.navigate(['/question']);
+      }else if(response.status == 401){
+        alert('Invalid Credentials');
       }
     })
   }

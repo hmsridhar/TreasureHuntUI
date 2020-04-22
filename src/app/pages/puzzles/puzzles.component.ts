@@ -14,7 +14,7 @@ export class PuzzlesComponent implements OnInit {
   currentPuzzle: number;
   
   constructor(public dialog: MatDialog) {
-    this.puzzles = [new PuzzleData('assets/logo.png',1,"This is question 1 text you know"),
+    this.puzzles = [new PuzzleData('assets/board-game.jpg',1,"This is question 1 text you know"),
     new PuzzleData('assets/treasure-hunt.jpg',2,'This is question 2 you know')];
     console.log(this.puzzles);
    }

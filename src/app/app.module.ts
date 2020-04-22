@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,7 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { QuestionComponent } from './pages/question/question.component';
 import { PuzzlesComponent} from './pages/puzzles/puzzles.component';
 import { LeaderboardComponent } from './pages/leaderboard/leaderboard.component';
@@ -24,6 +24,8 @@ import { TeamInfoComponent } from './pages/team-info/team-info.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AnswerPuzzleComponent  } from '../app/pages/puzzles/answer-puzzle.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { InterceptorService } from './interceptor.sevice';
+import {ErrorInterceptorService} from './error-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -54,7 +56,10 @@ import { MatDialogModule } from '@angular/material/dialog';
     NgbModule,
     MatDialogModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent],
   entryComponents: [AnswerPuzzleComponent]
 })

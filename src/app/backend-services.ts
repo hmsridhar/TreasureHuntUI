@@ -12,8 +12,9 @@ export class BackendServices{
          return this.httpClient.post<any>("http://localhost:8081/authenticate",userCreds,{observe:'response'})
          .pipe(
              tap(response => {
-                 response.headers.keys()
-                var data = new userData(userCreds.username,response.headers.get('Authorization'),1,'Abc',20);
+                 console.log(response.headers.keys())
+
+                var data = new userData(userCreds.username,response.headers.get('Authorization'),parseInt(response.headers.get('teamId')),userCreds.username,20);
                 localStorage.setItem('Data', JSON.stringify(data));
                 return response;
              })
