@@ -4,6 +4,9 @@
       <app-sidebar [teamName]="teamName" [score]="score"></app-sidebar>
     </mat-drawer>
     <mat-drawer-content autosize>
+      <!-- <div class="errormsg">
+        <h3>This is an error message</h3>
+      </div> -->
       <router-outlet (activate)="onActivate($event)"></router-outlet>
     </mat-drawer-content>
 </mat-drawer-container>

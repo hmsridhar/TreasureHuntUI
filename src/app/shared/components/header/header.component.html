@@ -1,9 +1,11 @@
-<mat-toolbar color="primary">
+<mat-toolbar [ngStyle]="{'background-color':'#FFD700'}">
     <mat-toolbar-row>
+        <!-- [ngStyle]="{'color':'white'}" -->
         <button mat-icon-button (click)="emitSideBarEvent()" *ngIf="isUserLoggedIn">
             <mat-icon>menu</mat-icon>
         </button>
-        <a routerLink=""><img class="logo" src="https://webassets.gigsky.com/wp-content/uploads/2020/03/GigSky-White-Logo-notag.png" alt="logo"></a>
+        
+        <a routerLink=""><img class="logo" src="https://i.dlpng.com/static/png/4009182-treasure-hunt-logo-png-3-png-image-treasure-hunt-png-300_211_preview.webp" alt="logo"></a>
         <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
             <ul fxLayout="row" fxLayoutGap="20px">
                 <li *ngIf="isUserLoggedIn">

@@ -1,1 +1,59 @@
-<p>question works!</p>
+
+<div [ngStyle]="{'width': 'auto','display': 'flex','flex-direction': 'column','justify-content': 'center','text-align': 'center','background-image':currentImagePath,'height': '100%','background-size':'cover','background-position':'center-center'}">
+    <div>
+        <br>
+        <div *ngIf="shipEntry" [ngStyle]="{'width': 'fit-content','opacity':'0.7','justify-content': 'center','align-items': 'center'}">
+            <mat-card>
+                <mat-card-title style="text-align: center;">You have almost reached the first secret city</mat-card-title>
+                <mat-card-content>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button (click)="enterCity()">Enter City</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+        <div class="mat-elevation-z8" *ngIf="cityGate" [ngStyle]="{'width': 'fit-content','justify-content': 'center','align-items': 'center'}">
+            <br><br><br><br>
+            <mat-card [ngStyle]="{'opacity':'0.7'}">
+                <mat-card-title style="text-align: center;">Enter the passcode</mat-card-title>
+                <mat-card-content>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Passcode</mat-label>
+                        <input matInput appearance="outline" [(ngModel)]="passcode">
+                    </mat-form-field><br>
+                </mat-card-content>
+                <mat-card-actions >
+                    <button mat-raised-button (click)="openGateIfAnswerValid()">Enter</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+        <div class="mat-elevation-z8" *ngIf="cityMain" [ngStyle]="{'width': 'fit-content','justify-content': 'center','align-items': 'center','opacity':'0.7'}">
+            <mat-card [ngStyle]="{'position':'relative', 'margin-left':'10%','max-width':'50%'}">
+                <mat-card-title style="text-align: center;">Welcome to the City of Devipura</mat-card-title>
+                <mat-card-content>
+                    <h2>This is a long question spanning lines as much as possible you know. Hopefully it will go on till the next line as well, maybe two or three lines as well. Who knows? Maybe Maybe ...</h2>
+                    <mat-form-field appearance="standard">
+                        <mat-label>Answer</mat-label>
+                        <input matInput appearance="outline" [(ngModel)]="answer">
+                    </mat-form-field><br>
+                </mat-card-content>
+                <mat-card-actions >
+                    <button mat-raised-button (click)="getKeyIfAnswerValid()">Enter</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+        <div class="mat-elevation-z8" *ngIf="shipExit" [ngStyle]="{'width': 'fit-content','justify-content': 'center','align-items': 'center','opacity':'0.7'}">
+            <mat-card [ngStyle]="{'position':'relative', 'margin-left':'10%','max-width':'50%'}">
+                <mat-card-title style="text-align: center;">Well done my warriors!</mat-card-title>
+                <mat-card-content>
+                    <h2>To obtain the key you should have uploaded a picture with all your co-warriors</h2>
+                    <h3>You can obtain the key only after this task</h3>
+                </mat-card-content>
+                <mat-card-actions >
+                    <button mat-raised-button (click)="ifPhotoUploaded()">Get Key</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
