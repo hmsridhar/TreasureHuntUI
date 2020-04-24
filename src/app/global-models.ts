@@ -82,3 +82,41 @@ export class TeamScoreList{
     type: string;
     list: TeamScore[];
 }
+
+export class DayImageDetails{
+    stage1img: string;
+    stage2img: string;
+    stage3img: string;
+    stage4img: string;
+
+    constructor(img1, img2, img3, img4){
+        this.stage1img = img1;
+        this.stage2img = img2;
+        this.stage3img = img3;
+        this.stage4img = img4;
+    }
+}
+
+export class GlobalImageDetails{
+    day1: DayImageDetails;
+    day2: DayImageDetails;
+    day3: DayImageDetails;
+    day4: DayImageDetails;
+
+    constructor(day1, day2, day3, day4){
+        this.day1 = day1;
+        this.day2 = day2;
+        this.day3 = day3;
+        this.day4 = day4;
+    }
+}
+
+export class PassKey{
+    type: string;
+    key: string;
+
+    constructor(key: string){
+        this.type = "passkey";
+        this.key = key;
+    }
+}

@@ -1,26 +1,32 @@
 import { Injectable } from '@angular/core';
 import { userData } from './global-models';
+import { BackendServices } from './backend-services';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({providedIn: 'root'})
 export class StateManagementService{
-
+    
+    backendUrl = "http://localhost:8081";
     username: string;
     teamName: string;
     userType: string;
     teamId: number;
+    lastUpdatedScore : number;
     currentDay: number;
     teamDay: number;
     teamStage: number;
     teamImageUploadStatus: string;
 
-    constructor(){
+    constructor(private httpClient: HttpClient){
         if(localStorage.getItem("Data") != undefined){
             var data = JSON.parse(localStorage.getItem('Data'));
             this.setUsername(data.username);
             this.setUsertype("TEAM");
             this.setTeamName(data.teamName);
             this.setTeamId(data.teamId);
+            this.setLastUpdatedScore(data.lastUpdatedScore);
             this.setCurrentDay(data.currentDay);
             this.setTeamDay(data.teamDay);
             this.setTeamStage(data.teamStage);
@@ -39,6 +45,22 @@ export class StateManagementService{
             this.setTeamImageUploadStatus(data.teamImageUploadStatus);
     }
 
+    public refreshUserDetails(){
+        this.getUserDetails().subscribe( response =>{
+            var data: userData = response;
+            localStorage.setItem("Data",JSON.stringify(data));
+            this.reinitializeStateManagement(data);
+        }
+         
+        )
+    }
+
+    getUserDetails():any{
+        return this.httpClient.get(this.backendUrl+"/team/"+this.getTeamId()+"/user").pipe(
+            map(response => response)
+        );
+    }
+
     public setUsername(username: string): void{ this.username = username; }   
     
     public getUsername(): string{ return this.username; }
@@ -54,6 +76,10 @@ export class StateManagementService{
     public setTeamId(teamId: number):void { this.teamId = teamId; }
 
     public getTeamId(): number{ return this.teamId; }
+
+    public setLastUpdatedScore(score: number){ this.lastUpdatedScore = score;}
+
+    public getLastUpdatedScore():number{ return this.lastUpdatedScore; }
 
     public getCurrentDay():number{ return this.currentDay;}
     public getTeamDay():number{ return this.teamDay;}

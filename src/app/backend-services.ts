@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
-import { userData } from './global-models';
+import { userData, PassKey } from './global-models';
 import { StateManagementService } from './state-management.service';
 
 @Injectable({providedIn: 'root'})
@@ -69,5 +69,15 @@ export class BackendServices{
             map(response => response)
        )
     }
+
+    tryMoveUsingPasskey(passkey: string):any{
+        var pKey = new PassKey(passkey);
+        return this.httpClient.post(this.backendUrl+"/config/team/"+this.stateMgmtService.getTeamId()+"/passkey/enter",
+        JSON.stringify(pKey),{observe: 'response', headers: {'Content-Type': 'application/json'}}).pipe(
+            map( response => response)
+        );
+    }
+
+    
 
 }

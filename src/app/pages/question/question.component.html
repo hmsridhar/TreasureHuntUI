@@ -15,11 +15,11 @@
         <div class="mat-elevation-z8" *ngIf="cityGate" [ngStyle]="{'width': 'fit-content','justify-content': 'center','align-items': 'center'}">
             <br><br><br><br>
             <mat-card [ngStyle]="{'opacity':'0.7'}">
-                <mat-card-title style="text-align: center;">Enter the passcode</mat-card-title>
+                <mat-card-title style="text-align: center;">Enter the passkey</mat-card-title>
                 <mat-card-content>
                     <mat-form-field appearance="standard">
-                        <mat-label>Passcode</mat-label>
-                        <input matInput appearance="outline" [(ngModel)]="passcode">
+                        <mat-label>Passkey</mat-label>
+                        <input matInput appearance="outline" [(ngModel)]="passkey">
                     </mat-form-field><br>
                 </mat-card-content>
                 <mat-card-actions >
@@ -35,9 +35,13 @@
                     <mat-form-field appearance="standard">
                         <mat-label>Answer</mat-label>
                         <input matInput appearance="outline" [(ngModel)]="answer">
-                    </mat-form-field><br>
+                    </mat-form-field>
+                    <br>
                 </mat-card-content>
                 <mat-card-actions >
+                    <button mat-raised-button>
+                        <mat-icon>contact_support</mat-icon>Get Hint
+                    </button>
                     <button mat-raised-button (click)="getKeyIfAnswerValid()">Enter</button>
                 </mat-card-actions>
             </mat-card>
@@ -50,7 +54,8 @@
                     <h3>You can obtain the key only after this task</h3>
                 </mat-card-content>
                 <mat-card-actions >
-                    <button mat-raised-button (click)="getKey()" [disabled]="isPhotoUploaded">Get Key</button>
+                    <button mat-raised-button [disabled]="isPhotoUploaded" routerLink="/upload-image">Upload Image</button>
+                    <button mat-raised-button (click)="getKey()" [disabled]="!isPhotoUploaded">Get Key</button>
                 </mat-card-actions>
             </mat-card>
         </div>
