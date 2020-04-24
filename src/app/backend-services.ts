@@ -50,4 +50,24 @@ export class BackendServices{
         )
     }
 
+    uploadTeamFile(file: File):any{
+        const formData = new FormData();
+        formData.append('file',file);
+        // return this.httpClient.post('http://localhost:8081/team/1/upload',formData,
+        // {headers: {'Content-Type' : undefined}}).pipe(
+        //     map(response => {
+        //         return response;
+        //     })
+        // )
+        console.log(formData);
+       return this.httpClient.post('http://localhost:8081/team/1/upload', formData,{observe: 'response'}).pipe(
+           map(response => {
+               return response;
+           })
+       )
+    //   .subscribe(event => {  
+    //     console.log(event)
+    //   })
+    }
+
 }

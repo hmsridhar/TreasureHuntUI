@@ -1,0 +1,7 @@
+<div class="main-div">
+    <div class="preview">
+        <img *ngIf="isImageReadyToRender" [src]="url" height="300"> <br/>
+    </div>
+    <input type="file" (change)="handleFileInput($event.target.files)"> <br>
+    <button *ngIf="isFileValid" mat-raised-button (click)="upload()" style="max-width: fit-content;"><mat-icon>file_upload</mat-icon>Upload Image</button>
+</div>

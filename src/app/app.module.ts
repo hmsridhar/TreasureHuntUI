@@ -27,6 +27,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { InterceptorService } from './interceptor.sevice';
 import {ErrorInterceptorService} from './error-interceptor.service';
 import { MatTableModule } from '@angular/material/table';
+import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { MatTableModule } from '@angular/material/table';
     LeaderboardComponent,
     DefaultComponent,
     TeamInfoComponent,
-    AnswerPuzzleComponent
+    AnswerPuzzleComponent,
+    ImageUploadComponent
   ],
   imports: [
     BrowserModule,

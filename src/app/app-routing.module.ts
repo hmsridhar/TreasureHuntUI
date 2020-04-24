@@ -7,6 +7,7 @@ import { PuzzlesComponent } from './pages/puzzles/puzzles.component';
 import { LeaderboardComponent } from './pages/leaderboard/leaderboard.component';
 import { DefaultComponent } from './pages/default/default.component';
 import { TeamInfoComponent } from './pages/team-info/team-info.component';
+import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
 
 
 const routes: Routes = [{
@@ -28,6 +29,9 @@ const routes: Routes = [{
 },{
   path: 'team-info',
   component: TeamInfoComponent
+},{
+  path: 'upload-image',
+  component: ImageUploadComponent
 }
 ];
 

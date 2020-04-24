@@ -16,11 +16,12 @@ export class ErrorInterceptorService implements HttpInterceptor{
                 this.backendService.logout();
                 // location.reload(true);
             }
-            
+            if(err.error != undefined){
             const error = err.error.message || err.statusText;
             if(error!=null){
                 return throwError(error);
             }
+        }
         }))
     }
 }
