@@ -26,6 +26,7 @@ import { AnswerPuzzleComponent  } from '../app/pages/puzzles/answer-puzzle.compo
 import { MatDialogModule } from '@angular/material/dialog';
 import { InterceptorService } from './interceptor.sevice';
 import {ErrorInterceptorService} from './error-interceptor.service';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import {ErrorInterceptorService} from './error-interceptor.service';
     HttpClientModule,
     MatMenuModule,
     NgbModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},

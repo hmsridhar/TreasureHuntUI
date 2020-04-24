@@ -1,1 +1,14 @@
-<p>team-info works!</p>
+<div style="display: flex; justify-content: center; height: 100%; background-image: url('https://www.ancient-origins.net/sites/default/files/field/image/Apache-Indian-Tribes_0.jpg'); background-size: cover; background-repeat: no-repeat;">
+    <mat-table [dataSource]="dataSource" matSort style="width: 30%; height: fit-content; opacity: 0.8; margin-top: 10%;">
+        <ng-container matColumnDef="teamId">
+            <mat-header-cell *matHeaderCellDef>Sl No.</mat-header-cell>
+            <mat-cell *matCellDef="let member">{{ member.teamId }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+            <mat-cell *matCellDef="let member">{{ member.name }}</mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns; let i=index" ></mat-row>
+    </mat-table>
+</div>

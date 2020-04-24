@@ -14,6 +14,10 @@ export class userData{
        this.lastUpdatedScore = lastUpdatedScore;
     }
 
+    public setLastUpdatedScore(score: number): void{
+        this.lastUpdatedScore = score;
+    }
+
 }
 
 export class PuzzleData{
@@ -26,4 +30,40 @@ constructor(path: string, id: number, text: string){
         this.id = id;
         this.text = text;
     }
+}
+export class TeamMember{
+    teamId: number;
+    name: string;
+
+    constructor(teamId: number, name: string){
+        this.teamId = teamId;
+        this.name = name;
+    }
+}
+export class TeamMembersKey{
+    teamMembersKey: TeamMember;
+}
+
+export class TeamInfo{
+    type: string;
+    name: string;
+    list: TeamMembersKey[];
+}
+
+export class TeamList{
+    list: TeamMember[]
+    constructor(l: TeamMember[]){
+        this.list = l;
+    }
+}
+
+export class TeamScore{
+    type: string;
+    teamName: string;
+    score: number
+}
+
+export class TeamScoreList{
+    type: string;
+    list: TeamScore[];
 }

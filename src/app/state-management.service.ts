@@ -9,7 +9,15 @@ export class StateManagementService{
     userType: string;
     teamId: number;
 
-    constructor(){}
+    constructor(){
+        if(localStorage.getItem("Data") != undefined){
+            var data = JSON.parse(localStorage.getItem('Data'));
+            this.setUsername(data.username);
+            this.setUsertype("TEAM");
+            this.setTeamName(data.teamName);
+            this.setTeamId(data.teamId);
+        }
+    }
 
     public setUsername(username: string): void{ this.username = username; }   
     

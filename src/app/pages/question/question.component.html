@@ -50,7 +50,7 @@
                     <h3>You can obtain the key only after this task</h3>
                 </mat-card-content>
                 <mat-card-actions >
-                    <button mat-raised-button (click)="ifPhotoUploaded()">Get Key</button>
+                    <button mat-raised-button (click)="getKey()" [disabled]="isPhotoUploaded">Get Key</button>
                 </mat-card-actions>
             </mat-card>
         </div>

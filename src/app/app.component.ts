@@ -18,6 +18,7 @@ export class AppComponent {
   constructor(private stateMgmtService: StateManagementService){
     console.log('here refresh');
     if(localStorage.getItem("Data") != undefined){
+      this.sideBarOpened = true;
       var data: userData = JSON.parse(localStorage.getItem('Data'));
       this.teamName = data.teamName;
       this.score = data.lastUpdatedScore;
@@ -40,6 +41,7 @@ export class AppComponent {
       event.loginEventEmitter.subscribe((eventData)=>{
         if(eventData.type == 'loginEvent'){
           this.isUserLoggedIn = true;
+          this.sideBarOpened = true;
           this.stateMgmtService.setUsername(eventData.username);
           this.stateMgmtService.setUsertype(eventData.userType);
           this.stateMgmtService.setTeamId(eventData.teamId);

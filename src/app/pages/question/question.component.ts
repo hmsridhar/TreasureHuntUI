@@ -14,6 +14,7 @@ export class QuestionComponent implements OnInit {
   cityGate = false;
   cityMain = false;
   shipExit = false;
+  isPhotoUploaded = true;
   
 
   constructor() { 
@@ -45,5 +46,9 @@ export class QuestionComponent implements OnInit {
       this.shipExit = true;
       this.currentImagePath="url('../../assets/shipExit.webp')"
     }
+  }
+
+  getKey(){
+    alert('Photo upload is done, so getting key');
   }
 }

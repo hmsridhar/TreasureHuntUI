@@ -14,7 +14,7 @@ export class BackendServices{
              tap(response => {
                  console.log(response.headers.keys())
 
-                var data = new userData(userCreds.username,response.headers.get('Authorization'),parseInt(response.headers.get('teamId')),userCreds.username,20);
+                var data = new userData(userCreds.username,response.headers.get('Authorization'),parseInt(response.headers.get('teamId')),userCreds.username,0);
                 localStorage.setItem('Data', JSON.stringify(data));
                 return response;
              })
@@ -24,6 +24,30 @@ export class BackendServices{
 
     logout(){
         localStorage.removeItem('Data');
+    }
+
+    getTeamInfo(teamId: number):any{
+        return this.httpClient.get("http://localhost:8081/team/"+teamId).pipe(
+            map(response => {
+                return response;
+            })
+        )
+    }
+
+    getTeamScore(teamId: number):any{
+        return this.httpClient.get("http://localhost:8081/team/"+teamId+"/points").pipe(
+            map(response =>{
+                return response;
+            })
+        )
+    }
+
+    getLeaderBoard():any{
+        return this.httpClient.get('http://localhost:8081/team/score').pipe(
+            map(response => {
+                return response;
+            })
+        )
     }
 
 }
