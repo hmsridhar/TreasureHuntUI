@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
       if(response.status == 200){
         this.service.getTeamScore(response.headers.get('teamId')).subscribe(innerResponse => {
           this.loginEventEmitter.emit({type: 'loginEvent', username: this.username, userType: 'TEAM', teamId: response.headers.get('teamId'), teamName: this.username, score : innerResponse.points});
-        this.router.navigate(['/question']);
+        this.router.navigate(['/quest']);
         var data : userData = JSON.parse(localStorage.getItem('Data'));
         data.setLastUpdatedScore(innerResponse.points);
         localStorage.setItem('Data',JSON.stringify(data));

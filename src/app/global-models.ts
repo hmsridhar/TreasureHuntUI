@@ -5,18 +5,33 @@ export class userData{
     teamId: number;
     teamName: string;
     lastUpdatedScore: number;
+    currentDay: number;
+    teamDay: number;
+    teamStage: number;
+    teamImageUploadStatus: string;
 
-    constructor(username: string, token: string, teamId: number, teamName: string, lastUpdatedScore: number){
+    constructor(username: string, token: string, teamId: number, teamName: string,
+         lastUpdatedScore: number, currentDay: number, teamDay: number,
+         teamStage: number, teamImageUploadStatus: string){
        this.username = username; 
        this.token = token;
        this.teamId = teamId;
        this.teamName = teamName;
        this.lastUpdatedScore = lastUpdatedScore;
+       this.currentDay = currentDay;
+       this.teamDay = teamDay;
+       this.teamStage = teamStage;
+       this.teamImageUploadStatus = teamImageUploadStatus;
     }
 
     public setLastUpdatedScore(score: number): void{
         this.lastUpdatedScore = score;
     }
+
+    public getCurrentDay():number{ return this.currentDay;}
+    public getTeamDay():number{ return this.teamDay;}
+    public getTeamStage():number{ return this.teamStage;}
+    public getTeamImageUploadStatus():string{ return this.teamImageUploadStatus}
 
 }
 

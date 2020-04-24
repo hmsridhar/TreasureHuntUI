@@ -18,7 +18,7 @@ const routes: Routes = [{
   path: 'login',
     component: LoginComponent
 },{
-  path: 'question',
+  path: 'quest',
   component: QuestionComponent
 },{
   path: 'puzzles',

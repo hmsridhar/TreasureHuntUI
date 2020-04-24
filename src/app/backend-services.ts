@@ -2,20 +2,32 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { userData } from './global-models';
+import { StateManagementService } from './state-management.service';
 
 @Injectable({providedIn: 'root'})
 export class BackendServices{
 
-    constructor(private httpClient: HttpClient){}
+    backendUrl = "http://localhost:8081";
+    constructor(private httpClient: HttpClient, private stateMgmtService: StateManagementService){}
     
     login(userCreds): any{
-         return this.httpClient.post<any>("http://localhost:8081/authenticate",userCreds,{observe:'response'})
+         return this.httpClient.post<any>(this.backendUrl+"/authenticate",userCreds,{observe:'response'})
          .pipe(
              tap(response => {
-                 console.log(response.headers.keys())
-
-                var data = new userData(userCreds.username,response.headers.get('Authorization'),parseInt(response.headers.get('teamId')),userCreds.username,0);
+                response.headers.keys()
+                var data = new userData(userCreds.username,response.headers.get('Authorization'),
+                parseInt(response.headers.get('teamId')),userCreds.username,0,parseInt(response.headers.get('currentDay')),
+                parseInt(response.headers.get('teamDay')),parseInt(response.headers.get('teamStage')),response.headers.get('teamImageUploadStatus'));
                 localStorage.setItem('Data', JSON.stringify(data));
+
+                this.stateMgmtService.setUsername(data.username);
+                this.stateMgmtService.setTeamName(data.teamName);
+                this.stateMgmtService.setUsertype("TEAM");
+                this.stateMgmtService.setTeamId(data.teamId);
+                this.stateMgmtService.setCurrentDay(data.currentDay);
+                this.stateMgmtService.setTeamDay(data.teamDay);
+                this.stateMgmtService.setTeamStage(data.teamStage);
+                this.stateMgmtService.setTeamImageUploadStatus(data.teamImageUploadStatus);
                 return response;
              })
          )
@@ -27,7 +39,7 @@ export class BackendServices{
     }
 
     getTeamInfo(teamId: number):any{
-        return this.httpClient.get("http://localhost:8081/team/"+teamId).pipe(
+        return this.httpClient.get(this.backendUrl+"/team/"+teamId).pipe(
             map(response => {
                 return response;
             })
@@ -35,7 +47,7 @@ export class BackendServices{
     }
 
     getTeamScore(teamId: number):any{
-        return this.httpClient.get("http://localhost:8081/team/"+teamId+"/points").pipe(
+        return this.httpClient.get(this.backendUrl+"/team/"+teamId+"/points").pipe(
             map(response =>{
                 return response;
             })
@@ -43,7 +55,7 @@ export class BackendServices{
     }
 
     getLeaderBoard():any{
-        return this.httpClient.get('http://localhost:8081/team/score').pipe(
+        return this.httpClient.get(this.backendUrl+'/team/score').pipe(
             map(response => {
                 return response;
             })
@@ -53,21 +65,9 @@ export class BackendServices{
     uploadTeamFile(file: File):any{
         const formData = new FormData();
         formData.append('file',file);
-        // return this.httpClient.post('http://localhost:8081/team/1/upload',formData,
-        // {headers: {'Content-Type' : undefined}}).pipe(
-        //     map(response => {
-        //         return response;
-        //     })
-        // )
-        console.log(formData);
-       return this.httpClient.post('http://localhost:8081/team/1/upload', formData,{observe: 'response'}).pipe(
-           map(response => {
-               return response;
-           })
+       return this.httpClient.post(this.backendUrl+'/team/'+this.stateMgmtService.getTeamId()+'/upload', formData,{observe: 'response'}).pipe(
+            map(response => response)
        )
-    //   .subscribe(event => {  
-    //     console.log(event)
-    //   })
     }
 
 }

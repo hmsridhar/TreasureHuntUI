@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { userData } from './global-models';
 
 
 @Injectable({providedIn: 'root'})
@@ -8,6 +9,10 @@ export class StateManagementService{
     teamName: string;
     userType: string;
     teamId: number;
+    currentDay: number;
+    teamDay: number;
+    teamStage: number;
+    teamImageUploadStatus: string;
 
     constructor(){
         if(localStorage.getItem("Data") != undefined){
@@ -16,7 +21,22 @@ export class StateManagementService{
             this.setUsertype("TEAM");
             this.setTeamName(data.teamName);
             this.setTeamId(data.teamId);
+            this.setCurrentDay(data.currentDay);
+            this.setTeamDay(data.teamDay);
+            this.setTeamStage(data.teamStage);
+            this.setTeamImageUploadStatus(data.teamImageUploadStatus);
         }
+    }
+
+    public reinitializeStateManagement(data: userData){
+            this.setUsername(data.username);
+            this.setUsertype("TEAM");
+            this.setTeamName(data.teamName);
+            this.setTeamId(data.teamId);
+            this.setCurrentDay(data.currentDay);
+            this.setTeamDay(data.teamDay);
+            this.setTeamStage(data.teamStage);
+            this.setTeamImageUploadStatus(data.teamImageUploadStatus);
     }
 
     public setUsername(username: string): void{ this.username = username; }   
@@ -35,5 +55,17 @@ export class StateManagementService{
 
     public getTeamId(): number{ return this.teamId; }
 
+    public getCurrentDay():number{ return this.currentDay;}
+    public getTeamDay():number{ return this.teamDay;}
+    public getTeamStage():number{ return this.teamStage;}
+    public getTeamImageUploadStatus():string{ return this.teamImageUploadStatus}
+
+    public setCurrentDay(day: number){ this.currentDay = day; }
+
+    public setTeamDay(day: number){ this.teamDay = day; }
+
+    public setTeamStage(stage: number){ this.teamStage = stage; }
+
+    public setTeamImageUploadStatus(status: string){ this.teamImageUploadStatus = status; }
 
 }
