@@ -17,17 +17,22 @@ export class BackendServices{
                 response.headers.keys()
                 var data = new userData(userCreds.username,response.headers.get('Authorization'),
                 parseInt(response.headers.get('teamId')),userCreds.username,0,parseInt(response.headers.get('currentDay')),
-                parseInt(response.headers.get('teamDay')),parseInt(response.headers.get('teamStage')),response.headers.get('teamImageUploadStatus'));
+                parseInt(response.headers.get('teamDay')),parseInt(response.headers.get('teamStage')),
+                response.headers.get('teamImageUploadStatus'),response.headers.get('hint'));
                 localStorage.setItem('Data', JSON.stringify(data));
 
                 this.stateMgmtService.setUsername(data.username);
                 this.stateMgmtService.setTeamName(data.teamName);
                 this.stateMgmtService.setUsertype("TEAM");
+                console.log('Hint'+response.headers.get('hint'));
+                // if(data.hint!= '' || data.hint!= undefined)
+                this.stateMgmtService.setHint(data.hint);
                 this.stateMgmtService.setTeamId(data.teamId);
                 this.stateMgmtService.setCurrentDay(data.currentDay);
                 this.stateMgmtService.setTeamDay(data.teamDay);
                 this.stateMgmtService.setTeamStage(data.teamStage);
                 this.stateMgmtService.setTeamImageUploadStatus(data.teamImageUploadStatus);
+                // this.stateMgmtService.refreshUserDetails();
                 return response;
              })
          )
@@ -78,6 +83,21 @@ export class BackendServices{
         );
     }
 
-    
+    reachCity():any{
+        return this.httpClient.get(this.backendUrl+"/config/team/"+this.stateMgmtService.getTeamId()+"/reachCity",{observe: 'response'}).pipe(
+            map( response => response)
+        );
+    }
+
+    getQuestion():any{
+        return this.httpClient.get(this.backendUrl+"/question/"+this.stateMgmtService.getTeamId()).pipe(
+            map(response => response)
+        )
+    }
+
+    getClue():any{
+        return this.httpClient.get(this.backendUrl+"/question/"+this.stateMgmtService.getTeamId()+"/clue",{observe: 'response'})
+        .pipe(map(response => response));
+    }
 
 }

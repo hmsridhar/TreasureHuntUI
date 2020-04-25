@@ -21,6 +21,7 @@
                         <mat-label>Passkey</mat-label>
                         <input matInput appearance="outline" [(ngModel)]="passkey">
                     </mat-form-field><br>
+                    <p *ngIf="invalidAnswer" style="color: red;">Wrong answer</p>
                 </mat-card-content>
                 <mat-card-actions >
                     <button mat-raised-button (click)="openGateIfAnswerValid()">Enter</button>
@@ -28,18 +29,19 @@
             </mat-card>
         </div>
         <div class="mat-elevation-z8" *ngIf="cityMain" [ngStyle]="{'width': 'fit-content','justify-content': 'center','align-items': 'center','opacity':'0.7'}">
-            <mat-card [ngStyle]="{'position':'relative', 'margin-left':'10%','max-width':'50%'}">
+            <mat-card [ngStyle]="{'position':'relative', 'margin-left':'10%','max-width':'100%'}">
                 <mat-card-title style="text-align: center;">Welcome to the City of Devipura</mat-card-title>
                 <mat-card-content>
-                    <h2>This is a long question spanning lines as much as possible you know. Hopefully it will go on till the next line as well, maybe two or three lines as well. Who knows? Maybe Maybe ...</h2>
+                    <h2>{{question}}</h2>
                     <mat-form-field appearance="standard">
                         <mat-label>Answer</mat-label>
                         <input matInput appearance="outline" [(ngModel)]="answer">
                     </mat-form-field>
                     <br>
+                    <h3 *ngIf="hintUnlocked">{{hintText}}</h3>
                 </mat-card-content>
                 <mat-card-actions >
-                    <button mat-raised-button>
+                    <button mat-raised-button (click)="getHint()">
                         <mat-icon>contact_support</mat-icon>Get Hint
                     </button>
                     <button mat-raised-button (click)="getKeyIfAnswerValid()">Enter</button>

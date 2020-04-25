@@ -14,7 +14,7 @@ export class ErrorInterceptorService implements HttpInterceptor{
             if (err.status === 401) {
                 alert('Invalid Credentials')
                 this.backendService.logout();
-                // location.reload(true);
+                location.reload(true);
             }
             if(err.error != undefined){
             const error = err.error.message || err.statusText;

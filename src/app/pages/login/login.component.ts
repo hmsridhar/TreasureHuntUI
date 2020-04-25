@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   loginUser(){
     this.service.login({username: this.username, password: this.password}).subscribe(response=>{
       // console.log(response);
-      console.log(response.status);
+      // console.log(response.status);
       if(response.status == 200){
         this.service.getTeamScore(response.headers.get('teamId')).subscribe(innerResponse => {
           this.loginEventEmitter.emit({type: 'loginEvent', username: this.username, userType: 'TEAM', teamId: response.headers.get('teamId'), teamName: this.username, score : innerResponse.points});

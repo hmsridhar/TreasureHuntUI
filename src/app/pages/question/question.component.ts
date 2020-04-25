@@ -11,7 +11,10 @@ import { BackendServices } from 'src/app/backend-services';
 export class QuestionComponent implements OnInit {
 
   teamDay : number;
+  question: string;
   teamStage: number;
+  hintText: string;
+  hintUnlocked = false;
   currentImagePath: string;
   passkey: string;
   answer: string;
@@ -22,12 +25,19 @@ export class QuestionComponent implements OnInit {
   isPhotoUploaded = false;
   imageDetails: GlobalImageDetails;
   dayObj: DayImageDetails = null;
+  invalidAnswer = false;
 
   constructor(private stateMgmtService: StateManagementService,
     private backendServices: BackendServices ) { 
     // this.currentImagePath = "url('../../assets/ship.jpg')";
     this.teamDay = this.stateMgmtService.getTeamDay();
     this.teamStage = this.stateMgmtService.getTeamStage();
+    if(this.stateMgmtService.getHint() != "" || this.stateMgmtService.getHint() != undefined){
+      this.hintText = "Hint: "+this.stateMgmtService.getHint();
+    }
+    if(this.hintText != "" || this.hintText != undefined){
+      this.hintUnlocked = true;
+    } 
     if(this.stateMgmtService.getTeamImageUploadStatus() == "done"){
       this.isPhotoUploaded = true;
     }
@@ -71,34 +81,49 @@ export class QuestionComponent implements OnInit {
     this.shipEntry = true;
   }
   showCityGate(){
-    this.currentImagePath ="url('../../assets/day1/door.jpg')";
+    this.currentImagePath = this.dayObj.stage2img;
     this.shipEntry = false;
     this.cityGate = true;
   }
   showCityMain(){
-    this.currentImagePath = "url('../../assets/day1/city.png')";
+    this.backendServices.getQuestion().subscribe(response=>{
+      this.question = response.text;
+    })
+    this.currentImagePath = this.dayObj.stage3img;
     this.cityGate = false;
     this.cityMain = true;
   }
   showShipExit(){
-    this.currentImagePath="url('../../assets/shipExit.webp')";
+    this.currentImagePath = this.dayObj.stage4img;
     this.cityMain = false;
     this.shipExit = true;
   }
 
   enterCity(){
-    this.currentImagePath ="url('../../assets/day1/door.jpg')";
-    this.shipEntry = false;
-    this.cityGate = true;
+    this.backendServices.reachCity().subscribe(response => {
+      alert(response.body.message);
+      this.stateMgmtService.refreshUserDetails();
+      this.showCityGate();
+    })
+    // this.currentImagePath ="url('../../assets/day1/door.jpg')";
+    // this.shipEntry = false;
+    // this.cityGate = true;
   }
 
   openGateIfAnswerValid(){
+    if(this.passkey == "" || this.passkey == undefined){
+      this.invalidAnswer = true;
+      // alert('Passkey cannot be empty!');
+      return;
+    }
     this.backendServices.tryMoveUsingPasskey(this.passkey).subscribe(response => {
-      alert(response.body.message);
+      this.invalidAnswer = false;
+      // alert(response.body.message);
       this.stateMgmtService.refreshUserDetails();
       this.showCityMain();
     },error => {
-      alert(error);
+      this.invalidAnswer = true;
+      // alert(error);
     })
     // if(this.passkey == "sudo"){
     //   this.passkey="";
@@ -119,5 +144,21 @@ export class QuestionComponent implements OnInit {
 
   getKey(){
     alert('Photo upload is done, so getting key');
+  }
+
+  getHint(){
+    this.hintUnlocked = true;
+    this.backendServices.getClue().subscribe(response =>{
+      console.log(response);
+      if(response.body.clue!= undefined){
+        this.hintText = "Hint: "+response.body.clue;
+        this.stateMgmtService.refreshUserDetails();
+      }
+      else
+        this.hintText = response.body.message
+    },error =>{
+      console.log(error);
+      this.hintText = error;
+    })
   }
 }

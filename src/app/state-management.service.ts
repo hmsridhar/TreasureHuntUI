@@ -13,6 +13,7 @@ export class StateManagementService{
     teamName: string;
     userType: string;
     teamId: number;
+    hint: string;
     lastUpdatedScore : number;
     currentDay: number;
     teamDay: number;
@@ -26,6 +27,7 @@ export class StateManagementService{
             this.setUsertype("TEAM");
             this.setTeamName(data.teamName);
             this.setTeamId(data.teamId);
+            this.setHint(data.hint);
             this.setLastUpdatedScore(data.lastUpdatedScore);
             this.setCurrentDay(data.currentDay);
             this.setTeamDay(data.teamDay);
@@ -39,6 +41,7 @@ export class StateManagementService{
             this.setUsertype("TEAM");
             this.setTeamName(data.teamName);
             this.setTeamId(data.teamId);
+            this.setHint(data.hint);
             this.setCurrentDay(data.currentDay);
             this.setTeamDay(data.teamDay);
             this.setTeamStage(data.teamStage);
@@ -76,6 +79,10 @@ export class StateManagementService{
     public setTeamId(teamId: number):void { this.teamId = teamId; }
 
     public getTeamId(): number{ return this.teamId; }
+
+    public setHint(hint: string){ this.hint = hint; }
+
+    public getHint():string{ return this.hint; }
 
     public setLastUpdatedScore(score: number){ this.lastUpdatedScore = score;}
 

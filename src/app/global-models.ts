@@ -9,10 +9,11 @@ export class userData{
     teamDay: number;
     teamStage: number;
     teamImageUploadStatus: string;
+    hint: string;
 
     constructor(username: string, token: string, teamId: number, teamName: string,
          lastUpdatedScore: number, currentDay: number, teamDay: number,
-         teamStage: number, teamImageUploadStatus: string){
+         teamStage: number, teamImageUploadStatus: string, hint: string){
        this.username = username; 
        this.token = token;
        this.teamId = teamId;
@@ -22,6 +23,7 @@ export class userData{
        this.teamDay = teamDay;
        this.teamStage = teamStage;
        this.teamImageUploadStatus = teamImageUploadStatus;
+       this.hint = hint;
     }
 
     public setLastUpdatedScore(score: number): void{
