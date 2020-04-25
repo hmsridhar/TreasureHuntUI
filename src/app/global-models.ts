@@ -42,6 +42,9 @@ export class PuzzleData{
     id: number;
     type: string;
     question: string;
+    maxAttemptsReached: boolean;
+    hasAnswered: boolean;
+    teamAnswer: string;
 
 constructor(path: string, id: number, text: string){
         this.filename = path;

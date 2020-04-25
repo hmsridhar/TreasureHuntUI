@@ -2,7 +2,7 @@
     <br>
     <mat-table [dataSource]="dataSource" style="width: 30%; height: fit-content; opacity: 0.8; margin-top: 10%; margin-left: 10%;">
         <ng-container matColumnDef="teamName">
-            <mat-header-cell *matHeaderCellDef>Sl No.</mat-header-cell>
+            <mat-header-cell *matHeaderCellDef>Kingdom</mat-header-cell>
             <mat-cell *matCellDef="let team">{{ team.teamName }}</mat-cell>
         </ng-container>
         <ng-container matColumnDef="score">

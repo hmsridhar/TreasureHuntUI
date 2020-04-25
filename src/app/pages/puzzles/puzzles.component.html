@@ -33,12 +33,34 @@ interval="10000"
         <div>
             <img src="../../../assets/puzzles/{{puzzle.filename}}">
         </div>
-        <br><br><br><br><br>
+        <br *ngIf="puzzle.question">
+        <br><br><br><br>
         <div class="carousel-caption">
-          <h1>{{puzzle.question}}</h1>
+          <h1 style="color: black; background-color: white;">{{puzzle.question}}</h1>
             <button #test mat-raised-button id='{{puzzle.id}}' color="primary" (click)="openDialog(test)">Answer</button>
         </div>
     </ng-template>
+    <ng-template ngbSlide *ngFor="let puzzle of answeredPuzzles">
+      <div>
+          <img src="../../../assets/puzzles/{{puzzle.filename}}">
+      </div><br><br><br><br>
+      <div class="carousel-caption">
+        <h1 style="color: black; background-color: white;">{{puzzle.question}}</h1>
+        <h2 style="color: green; background-color: white;">Answer: {{puzzle.teamAnswer}}</h2>
+          <!-- <button #test mat-raised-button id='{{puzzle.id}}' color="primary" (click)="openDialog(test)" disabled>Answer</button> -->
+      </div>
+  </ng-template>
+  <ng-template ngbSlide *ngFor="let puzzle of maxAttemptPuzzles">
+    <div>
+        <img src="../../../assets/puzzles/{{puzzle.filename}}">
+    </div>
+    <br><br><br><br><br>
+    <div class="carousel-caption">
+      <h1 style="color: black; background-color: white;">{{puzzle.question}}</h1>
+      <h2 style="color: red; background-color: white;">Max Attempts reached for this question</h2>
+        <!-- <button #test mat-raised-button id='{{puzzle.id}}' color="primary" (click)="openDialog(test)">Answer</button> -->
+    </div>
+</ng-template>
   </ngb-carousel>
 </div>
 </div>

@@ -11,15 +11,27 @@ import { BackendServices } from 'src/app/backend-services';
 })
 export class PuzzlesComponent implements OnInit {
 
-  public puzzles: PuzzleData[] ;
+  public puzzles: PuzzleData[] = [];
+  answeredPuzzles: PuzzleData[] = [];
+  maxAttemptPuzzles: PuzzleData[] =[] ;
   currentPuzzle: number;
   
   constructor(public dialog: MatDialog, private backendServices: BackendServices) {
-    this.puzzles = [new PuzzleData('assets/board-game.jpg',1,"This is question 1 text you know"),
-    new PuzzleData('assets/treasure-hunt.jpg',2,'This is question 2 you know')];
-    console.log(this.puzzles);
+    // this.puzzles = [new PuzzleData('assets/board-game.jpg',1,"This is question 1 text you know"),
+    // new PuzzleData('assets/treasure-hunt.jpg',2,'This is question 2 you know')];
+    // console.log(this.puzzles);
     this.backendServices.getPuzzles().subscribe(response => {
-      this.puzzles = response.list;
+      var allpuzzles: PuzzleData[] = response.list;
+      for(var i=0;i<allpuzzles.length;i++){
+        if(allpuzzles[i].hasAnswered){
+          this.answeredPuzzles.push(allpuzzles[i])
+        }else if(allpuzzles[i].maxAttemptsReached){
+          this.maxAttemptPuzzles.push(allpuzzles[i])
+        }else{
+          this.puzzles.push(allpuzzles[i]);
+        }
+      }
+      // this.puzzles = response.list;
     })
    }
 
@@ -30,6 +42,7 @@ export class PuzzlesComponent implements OnInit {
   submitAnswer(event){
     var id :number = event._elementRef.nativeElement.attributes.id.value;
     console.log(id);
+
   }
 
   openDialog(event):void{
@@ -40,13 +53,39 @@ export class PuzzlesComponent implements OnInit {
     //   puz: {puzzleId: this.currentPuzzle}
     // })
     const dialogRef = this.dialog.open(AnswerPuzzleComponent,{
-      width: '230px',
+      width: '300px',
       data: { puzzleId : this.currentPuzzle}
+    });
+    const eventListener = dialogRef.componentInstance.answerStatusEvent.subscribe(data=>{
+        // console.log(data);
+        this.reshufflePuzzles(data.type, data.puzzleId, data.answer);
     });
     dialogRef.afterClosed().subscribe(result => {
       // this.refresh();
       console.log('The dialog was closed');
+      eventListener.unsubscribe();
     });
+  }
+
+  reshufflePuzzles(eventType: string, puzzleId: number, answer: string){
+    var idMap = this.puzzles.map(function(element){ return element.id});
+    var removeIndex = idMap.findIndex(element => element == puzzleId);
+    
+    var elementToBeRemoved = this.puzzles[removeIndex];
+    // console.log(elementToBeRemoved);
+    if(eventType == "correct-ans"){
+      elementToBeRemoved.teamAnswer=answer;
+      alert('Yayy! That\'s the right answer');
+      this.answeredPuzzles.push(elementToBeRemoved);
+    }else if(eventType == "max-attempts"){
+      alert('Max Attempts reached, question disabled!')
+      this.maxAttemptPuzzles.push(elementToBeRemoved);
+    }
+    this.puzzles.splice(removeIndex,1);
+    // console.log('original')
+    console.log(this.puzzles);
+    // console.log('answered')
+    // console.log(this.answeredPuzzles);
   }
 
 }

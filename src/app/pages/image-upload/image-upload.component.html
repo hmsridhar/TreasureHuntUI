@@ -1,4 +1,4 @@
-<div class="main-div">
+<div class="main-div" style="background-image: url('https://www.yenlo.com/hubfs/Blog_images/Mirror%20mirror.jpg'); background-size: cover; width: 100%;   background-repeat: no-repeat;">
     <div *ngIf="!isFileUploadDone">
         <div class="preview">
             <img *ngIf="isImageReadyToRender" [src]="url" height="300"> <br/>
@@ -7,7 +7,7 @@
         <button *ngIf="isFileValid" mat-raised-button (click)="upload()" style="max-width: fit-content;"><mat-icon>file_upload</mat-icon>Upload Image</button>
     </div>
     <div *ngIf="isFileUploadDone">
-        <h1>File already uploaded</h1>
+        <h1 style="color: white;">File already uploaded</h1>
         <button mat-raised-button routerLink="/quest">Go back to quest</button>
     </div>
 </div>

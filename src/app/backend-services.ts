@@ -113,7 +113,15 @@ export class BackendServices{
     }
 
     getPuzzles():any{
-        return this.httpClient.get(this.backendUrl+"/puzzle").pipe(map(response => response));
+        return this.httpClient.get(this.backendUrl+"/puzzle/"+this.stateMgmtService.getTeamId()).pipe(map(response => response));
+    }
+
+    submitPuzzleAnswer(puzzleId: number,answer: string):any{
+        var ans = new Answer(answer);
+        return this.httpClient.post(this.backendUrl+"/puzzle/"+this.stateMgmtService.getTeamId()+"/"+puzzleId+"/answer",ans
+        ,{observe:'response',headers:{'Content-Type': 'application/json'}}).pipe(
+            map(response => response)
+        );
     }
 
 }
