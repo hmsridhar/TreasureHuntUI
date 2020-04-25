@@ -38,14 +38,15 @@ export class userData{
 }
 
 export class PuzzleData{
-    path: string;
+    filename: string;
     id: number;
-    text: string;
+    type: string;
+    question: string;
 
 constructor(path: string, id: number, text: string){
-        this.path = path;
+        this.filename = path;
         this.id = id;
-        this.text = text;
+        this.question = text;
     }
 }
 export class TeamMember{

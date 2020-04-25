@@ -6,7 +6,7 @@
 <div class="slide">
 <ngb-carousel [showNavigationArrows]="true" 
 [showNavigationIndicators]="true"
-interval="5000"
+interval="10000"
 [keyboard]="true"
 [pauseOnHover]="true"
 [wrap]="true">
@@ -31,10 +31,11 @@ interval="5000"
     </ng-template> -->
     <ng-template ngbSlide *ngFor="let puzzle of puzzles">
         <div>
-            <img src="{{puzzle.path}}">
+            <img src="../../../assets/puzzles/{{puzzle.filename}}">
         </div>
+        <br><br><br><br><br>
         <div class="carousel-caption">
-          <p>{{puzzle.text}}</p>
+          <h1>{{puzzle.question}}</h1>
             <button #test mat-raised-button id='{{puzzle.id}}' color="primary" (click)="openDialog(test)">Answer</button>
         </div>
     </ng-template>

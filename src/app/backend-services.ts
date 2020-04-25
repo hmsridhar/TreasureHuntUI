@@ -112,4 +112,8 @@ export class BackendServices{
         .pipe(map(response => response));
     }
 
+    getPuzzles():any{
+        return this.httpClient.get(this.backendUrl+"/puzzle").pipe(map(response => response));
+    }
+
 }
