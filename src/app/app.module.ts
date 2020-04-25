@@ -28,6 +28,7 @@ import { InterceptorService } from './interceptor.sevice';
 import {ErrorInterceptorService} from './error-interceptor.service';
 import { MatTableModule } from '@angular/material/table';
 import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
+import { JwtModule, JwtHelperService,JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -58,11 +59,14 @@ import { ImageUploadComponent } from './pages/image-upload/image-upload.componen
     MatMenuModule,
     NgbModule,
     MatDialogModule,
-    MatTableModule
+    MatTableModule,
+    JwtModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true}
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptorService, multi: true},
+    { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService
   ],
   bootstrap: [AppComponent],
   entryComponents: [AnswerPuzzleComponent]

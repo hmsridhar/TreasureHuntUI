@@ -8,6 +8,8 @@ import { LeaderboardComponent } from './pages/leaderboard/leaderboard.component'
 import { DefaultComponent } from './pages/default/default.component';
 import { TeamInfoComponent } from './pages/team-info/team-info.component';
 import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
+import { JWTAuthService } from './jwt-auth.service';
+import { AuthGuardService } from './pages/auth-guard.service';
 
 
 const routes: Routes = [{
@@ -19,20 +21,26 @@ const routes: Routes = [{
     component: LoginComponent
 },{
   path: 'quest',
-  component: QuestionComponent
+  component: QuestionComponent,
+  canActivate: [AuthGuardService]
 },{
   path: 'puzzles',
-  component: PuzzlesComponent
+  component: PuzzlesComponent,
+  canActivate: [AuthGuardService]
 },{
   path: 'leaderboard',
-  component: LeaderboardComponent
+  component: LeaderboardComponent,
+  canActivate: [AuthGuardService]
 },{
   path: 'team-info',
-  component: TeamInfoComponent
+  component: TeamInfoComponent,
+  canActivate: [AuthGuardService]
 },{
   path: 'upload-image',
-  component: ImageUploadComponent
-}
+  component: ImageUploadComponent,
+  canActivate: [AuthGuardService]
+},
+// { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
