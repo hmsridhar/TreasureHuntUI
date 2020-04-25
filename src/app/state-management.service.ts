@@ -13,6 +13,7 @@ export class StateManagementService{
     teamName: string;
     userType: string;
     teamId: number;
+    token: string;
     hint: string;
     lastUpdatedScore : number;
     currentDay: number;
@@ -41,6 +42,7 @@ export class StateManagementService{
             this.setUsertype("TEAM");
             this.setTeamName(data.teamName);
             this.setTeamId(data.teamId);
+            this.setToken(data.token);
             this.setHint(data.hint);
             this.setCurrentDay(data.currentDay);
             this.setTeamDay(data.teamDay);
@@ -79,6 +81,10 @@ export class StateManagementService{
     public setTeamId(teamId: number):void { this.teamId = teamId; }
 
     public getTeamId(): number{ return this.teamId; }
+
+    public setToken(token: string){ this.token = token;}
+
+    public getToken():string{ return this.token;}
 
     public setHint(hint: string){ this.hint = hint; }
 

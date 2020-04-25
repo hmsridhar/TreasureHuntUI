@@ -11,8 +11,11 @@ import { BackendServices } from 'src/app/backend-services';
 export class QuestionComponent implements OnInit {
 
   teamDay : number;
+  keyText: string;
+  keyAvailable : boolean;
   question: string;
   teamStage: number;
+  showSolvePuzzleButton = false;
   hintText: string;
   hintUnlocked = false;
   currentImagePath: string;
@@ -26,13 +29,14 @@ export class QuestionComponent implements OnInit {
   imageDetails: GlobalImageDetails;
   dayObj: DayImageDetails = null;
   invalidAnswer = false;
+  answerStatus: string;
 
   constructor(private stateMgmtService: StateManagementService,
     private backendServices: BackendServices ) { 
     // this.currentImagePath = "url('../../assets/ship.jpg')";
     this.teamDay = this.stateMgmtService.getTeamDay();
     this.teamStage = this.stateMgmtService.getTeamStage();
-    if(this.stateMgmtService.getHint() != "" || this.stateMgmtService.getHint() != undefined){
+    if(this.stateMgmtService.getHint()){
       this.hintText = "Hint: "+this.stateMgmtService.getHint();
     }
     if(this.hintText != "" || this.hintText != undefined){
@@ -45,7 +49,7 @@ export class QuestionComponent implements OnInit {
       day1: new DayImageDetails("url('../../assets/ship.jpg')","url('../../assets/day1/door.jpg')",
               "url('../../assets/day1/city.png')","url('../../assets/shipExit.webp')"),
       day2: new DayImageDetails("url('../../assets/ship.jpg')","url('../../assets/day2/door.jpg')",
-              "url('../../assets/day2/city.png')","url('../../assets/shipExit.webp')"),
+              "url('../../assets/day2/city.jpg')","url('../../assets/shipExit.webp')"),
       day3: new DayImageDetails("url('../../assets/ship.jpg')","url('../../assets/day3/door.jpg')",
               "url('../../assets/day3/city.png')","url('../../assets/shipExit.webp')"),
       day4: new DayImageDetails("url('../../assets/ship.jpg')","url('../../assets/day4/door.jpg')",
@@ -97,6 +101,7 @@ export class QuestionComponent implements OnInit {
     this.currentImagePath = this.dayObj.stage4img;
     this.cityMain = false;
     this.shipExit = true;
+    this.keyAvailable = true;
   }
 
   enterCity(){
@@ -118,44 +123,51 @@ export class QuestionComponent implements OnInit {
     }
     this.backendServices.tryMoveUsingPasskey(this.passkey).subscribe(response => {
       this.invalidAnswer = false;
-      // alert(response.body.message);
-      this.stateMgmtService.refreshUserDetails();
       this.showCityMain();
+      this.stateMgmtService.refreshUserDetails();
     },error => {
       this.invalidAnswer = true;
-      // alert(error);
     })
-    // if(this.passkey == "sudo"){
-    //   this.passkey="";
-    //   this.cityGate = false;
-    //   this.cityMain = true;
-    //   this.currentImagePath = "url('../../assets/day1/city.png')"
-    // }
   }
 
-  getKeyIfAnswerValid(){
-    if(this.answer == "sudo"){
-      this.answer = "";
-      this.cityMain = false;
-      this.shipExit = true;
-      this.currentImagePath="url('../../assets/shipExit.webp')"
+  submitAnswer(){
+    if(this.answer == "" || this.answer == undefined){
+      this.answerStatus = "Answer cannot be empty!";
+      return;
     }
+    this.backendServices.submitAnswer(this.answer).subscribe(response => {
+      if(response.message == "Incorrect answer,please Retry"){
+          this.answerStatus = response.message;
+      }else if(response.message == "Answer submitted successfully"){
+        this.stateMgmtService.refreshUserDetails();
+        this.showShipExit();
+      }
+    });
   }
 
   getKey(){
-    alert('Photo upload is done, so getting key');
+    // alert('Photo upload is done, so getting key');
+    this.backendServices.getKey().subscribe(response=>{
+      this.keyText = "Your key for the day is "+response.body.key+". Please keep this key safe, as it might be required later";
+    },error =>{
+      this.keyText = "Your key is not yet available";
+    })
   }
 
   getHint(){
     this.hintUnlocked = true;
     this.backendServices.getClue().subscribe(response =>{
-      console.log(response);
+      // console.log(response);
       if(response.body.clue!= undefined){
+        this.showSolvePuzzleButton = false;
         this.hintText = "Hint: "+response.body.clue;
+        console.log(this.hintText);
         this.stateMgmtService.refreshUserDetails();
       }
-      else
-        this.hintText = response.body.message
+      else{
+        this.hintText = response.body.message;
+        this.showSolvePuzzleButton = true;
+      }
     },error =>{
       console.log(error);
       this.hintText = error;

@@ -29,7 +29,7 @@
             </mat-card>
         </div>
         <div class="mat-elevation-z8" *ngIf="cityMain" [ngStyle]="{'width': 'fit-content','justify-content': 'center','align-items': 'center','opacity':'0.7'}">
-            <mat-card [ngStyle]="{'position':'relative', 'margin-left':'10%','max-width':'100%'}">
+            <mat-card [ngStyle]="{'position':'relative', 'margin-left':'10%','width': 'fit-content','max-width':'100%'}">
                 <mat-card-title style="text-align: center;">Welcome to the City of Devipura</mat-card-title>
                 <mat-card-content>
                     <h2>{{question}}</h2>
@@ -38,22 +38,30 @@
                         <input matInput appearance="outline" [(ngModel)]="answer">
                     </mat-form-field>
                     <br>
-                    <h3 *ngIf="hintUnlocked">{{hintText}}</h3>
+                    <h3 *ngIf="hintUnlocked" style="color: green;">{{hintText}}</h3>
+                    <button *ngIf="showSolvePuzzleButton" mat-raised-button routerLink="/puzzles">Solve puzzles</button>
+                    <h3 style="color: red;">{{answerStatus}}</h3>
                 </mat-card-content>
                 <mat-card-actions >
                     <button mat-raised-button (click)="getHint()">
                         <mat-icon>contact_support</mat-icon>Get Hint
                     </button>
-                    <button mat-raised-button (click)="getKeyIfAnswerValid()">Enter</button>
+                    <button mat-raised-button (click)="submitAnswer()">Submit Answer</button>
                 </mat-card-actions>
             </mat-card>
         </div>
         <div class="mat-elevation-z8" *ngIf="shipExit" [ngStyle]="{'width': 'fit-content','justify-content': 'center','align-items': 'center','opacity':'0.7'}">
-            <mat-card [ngStyle]="{'position':'relative', 'margin-left':'10%','max-width':'50%'}">
-                <mat-card-title style="text-align: center;">Well done my warriors!</mat-card-title>
+            <mat-card [ngStyle]="{'position':'relative', 'margin-left':'10%','width':'fit-content','max-width':'70%'}">
+                <mat-card-title style="text-align: center;">Well done saviours!</mat-card-title>
                 <mat-card-content>
-                    <h2>To obtain the key you should have uploaded a picture with all your co-warriors</h2>
-                    <h3>You can obtain the key only after this task</h3>
+                        <h2>You have successfully completed this day's challenge</h2>
+                    <div *ngIf="!isPhotoUploaded">
+                        <h2>To obtain the key you should have uploaded a picture with all your co-warriors</h2>
+                        <h3>You can obtain the key only after this task</h3>
+                    </div>
+                    <div>
+                        {{keyText}}
+                    </div>
                 </mat-card-content>
                 <mat-card-actions >
                     <button mat-raised-button [disabled]="isPhotoUploaded" routerLink="/upload-image">Upload Image</button>

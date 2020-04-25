@@ -122,3 +122,11 @@ export class PassKey{
         this.key = key;
     }
 }
+
+export class Answer{
+    answer: string;
+
+    constructor(answer: string){
+        this.answer = answer;
+    }
+}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
-import { userData, PassKey } from './global-models';
+import { userData, PassKey, Answer } from './global-models';
 import { StateManagementService } from './state-management.service';
 
 @Injectable({providedIn: 'root'})
@@ -97,6 +97,18 @@ export class BackendServices{
 
     getClue():any{
         return this.httpClient.get(this.backendUrl+"/question/"+this.stateMgmtService.getTeamId()+"/clue",{observe: 'response'})
+        .pipe(map(response => response));
+    }
+
+    submitAnswer(answer):any{
+        var jAnswer = new Answer(answer);
+        return this.httpClient.post<any>(this.backendUrl+"/question/"+this.stateMgmtService.getTeamId()+"/answer",jAnswer).pipe(
+            map( response => response)
+        );
+    }
+
+    getKey():any{
+        return this.httpClient.get(this.backendUrl+"/config/team/"+this.stateMgmtService.getTeamId()+"/key",{observe: 'response'})
         .pipe(map(response => response));
     }
 
