@@ -13,6 +13,7 @@ export class QuestionComponent implements OnInit {
 
   teamDay : number;
   keyText: string;
+  keyButtonText = "Get Key";
   keyAvailable : boolean;
   question: string;
   teamStage: number;
@@ -32,6 +33,7 @@ export class QuestionComponent implements OnInit {
   invalidAnswer = false;
   answerStatus: string;
   isTeamLaggingBehind = false;
+  hasCompletedFinalChallenge = false;
 
   constructor(private stateMgmtService: StateManagementService,
     private backendServices: BackendServices,private router: Router ) { 
@@ -42,6 +44,9 @@ export class QuestionComponent implements OnInit {
     if(this.teamDay < currentDay){
       this.isTeamLaggingBehind = true;
     }
+    if(this.teamDay == 4){
+      this.keyButtonText = "Check Completion Status"
+    }
     if(this.stateMgmtService.getHint()){
       this.hintText = "Hint: "+this.stateMgmtService.getHint();
     }
@@ -49,7 +54,7 @@ export class QuestionComponent implements OnInit {
       this.hintUnlocked = true;
     } 
     if(this.stateMgmtService.getTeamImageUploadStatus() == "done"){
-      this.isPhotoUploaded = true;
+      this.isPhotoUploaded = true; 
     }
     this.imageDetails = {
       day1: new DayImageDetails("url('../../assets/ship.jpg')","url('../../assets/day1/door.jpg')",
@@ -57,9 +62,9 @@ export class QuestionComponent implements OnInit {
       day2: new DayImageDetails("url('../../assets/ship.jpg')","url('../../assets/day2/door.jpg')",
               "url('../../assets/day2/city.jpg')","url('../../assets/shipExit.webp')"),
       day3: new DayImageDetails("url('../../assets/ship.jpg')","url('../../assets/day3/door.jpg')",
-              "url('../../assets/day3/city.png')","url('../../assets/shipExit.webp')"),
-      day4: new DayImageDetails("url('../../assets/ship.jpg')","url('../../assets/day4/door.jpg')",
-              "url('../../assets/day4/city.png')","url('../../assets/shipExit.webp')"),
+              "url('../../assets/day3/city.jpg')","url('../../assets/shipExit.webp')"),
+      day4: new DayImageDetails("url('../../assets/day4/main.jpg')","url('../../assets/day4/door.jpg')",
+              "url('../../assets/day4/city.jpg')","url('../../assets/day4/exit.jpg')"),
     }
     this.dayObj = this.getDayObject();
     switch(this.teamStage){
@@ -146,6 +151,10 @@ export class QuestionComponent implements OnInit {
           this.answerStatus = response.message;
       }else if(response.message == "Answer submitted successfully"){
         this.stateMgmtService.refreshUserDetails();
+        if(this.teamDay == 4){
+          this.hasCompletedFinalChallenge = true;
+          this.keyButtonText = "Check Completion Status";
+        }
         this.showShipExit();
       }
     });
@@ -156,11 +165,14 @@ export class QuestionComponent implements OnInit {
     this.backendServices.getKey().subscribe(response=>{
       if(response.body.key.includes("key with you already")){
         this.keyText = response.body.key;
-      }else {
+      }else if(response.body.key.includes("Game completed")){
+        alert('Game completed!');
+      }
+      else {
       this.keyText = "Your key for the day is "+response.body.key+". Please keep this key safe, as it might be required later";
       }
     },error =>{
-      this.keyText = "Your key is not yet available";
+      this.keyText = "Your team image has not yet been approved";
     })
   }
 

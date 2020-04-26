@@ -56,7 +56,8 @@
                 <mat-card-content>
                         <h2>You have successfully completed this day's challenge</h2>
                     <div *ngIf="!isPhotoUploaded">
-                        <h2>To obtain the key you should have uploaded a picture with all your co-warriors</h2>
+                        <h2 *ngIf="!hasCompletedFinalChallenge">To obtain the key you should have uploaded a picture with all your co-warriors</h2>
+                        <h2 *ngIf="hasCompletedFinalChallenge">To finish the final task, you should have uploaded a picture with all your co-warriors</h2>
                         <h3>You can obtain the key only after this task</h3>
                     </div>
                     <div>
@@ -65,7 +66,7 @@
                 </mat-card-content>
                 <mat-card-actions >
                     <button mat-raised-button [disabled]="isPhotoUploaded" routerLink="/upload-image">Upload Image</button>
-                    <button mat-raised-button (click)="getKey()" [disabled]="!isPhotoUploaded">Get Key</button>
+                    <button mat-raised-button (click)="getKey()" [disabled]="!isPhotoUploaded">{{keyButtonText}}</button>
                 </mat-card-actions>
             </mat-card>
         </div>
