@@ -7,7 +7,7 @@ import { StateManagementService } from './state-management.service';
 @Injectable({providedIn: 'root'})
 export class BackendServices{
 
-    backendUrl = "http://localhost:8081";
+    backendUrl = "http://192.168.0.101:8081";
     constructor(private httpClient: HttpClient, private stateMgmtService: StateManagementService){}
     
     login(userCreds): any{
@@ -122,6 +122,11 @@ export class BackendServices{
         ,{observe:'response',headers:{'Content-Type': 'application/json'}}).pipe(
             map(response => response)
         );
+    }
+
+    enterNextCity():any{
+        return this.httpClient.get(this.backendUrl+"/config/team/"+this.stateMgmtService.getTeamId()+"/enterNextCity",{observe: 'response'})
+        .pipe(map(response => response));
     }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GlobalImageDetails, DayImageDetails } from 'src/app/global-models';
 import { StateManagementService } from 'src/app/state-management.service';
 import { BackendServices } from 'src/app/backend-services';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-question',
@@ -30,12 +31,17 @@ export class QuestionComponent implements OnInit {
   dayObj: DayImageDetails = null;
   invalidAnswer = false;
   answerStatus: string;
+  isTeamLaggingBehind = false;
 
   constructor(private stateMgmtService: StateManagementService,
-    private backendServices: BackendServices ) { 
+    private backendServices: BackendServices,private router: Router ) { 
     // this.currentImagePath = "url('../../assets/ship.jpg')";
     this.teamDay = this.stateMgmtService.getTeamDay();
     this.teamStage = this.stateMgmtService.getTeamStage();
+    var currentDay = this.stateMgmtService.getCurrentDay();
+    if(this.teamDay < currentDay){
+      this.isTeamLaggingBehind = true;
+    }
     if(this.stateMgmtService.getHint()){
       this.hintText = "Hint: "+this.stateMgmtService.getHint();
     }
@@ -148,7 +154,11 @@ export class QuestionComponent implements OnInit {
   getKey(){
     // alert('Photo upload is done, so getting key');
     this.backendServices.getKey().subscribe(response=>{
+      if(response.body.key.includes("key with you already")){
+        this.keyText = response.body.key;
+      }else {
       this.keyText = "Your key for the day is "+response.body.key+". Please keep this key safe, as it might be required later";
+      }
     },error =>{
       this.keyText = "Your key is not yet available";
     })
@@ -171,6 +181,17 @@ export class QuestionComponent implements OnInit {
     },error =>{
       console.log(error);
       this.hintText = error;
+    })
+  }
+
+  enterNextCity(){
+    this.backendServices.enterNextCity().subscribe(response=>{
+      this.stateMgmtService.refreshUserDetails();
+      alert(response.body.message);
+      window.location.reload(true)
+      // this.router.navigate['/quest'];
+    },error =>{
+      alert(error);
     })
   }
 }

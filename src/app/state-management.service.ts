@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 @Injectable({providedIn: 'root'})
 export class StateManagementService{
     
-    backendUrl = "http://localhost:8081";
+    backendUrl = "http://192.168.0.101:8081";
     username: string;
     teamName: string;
     userType: string;
@@ -51,6 +51,7 @@ export class StateManagementService{
     }
 
     public refreshUserDetails(){
+        console.log('Refreshing');
         this.getUserDetails().subscribe( response =>{
             var data: userData = response;
             localStorage.setItem("Data",JSON.stringify(data));

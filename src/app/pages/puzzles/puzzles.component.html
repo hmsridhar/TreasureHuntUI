@@ -29,6 +29,19 @@ interval="10000"
         <p>Consectetur tortor volutpat pretium.</p>
       </div>
     </ng-template> -->
+    <ng-template ngbSlide>
+        <div>
+          <img src="https://elearningbrothers.com/wp-content/uploads/2013/10/edgeaudio-575x405.jpg">
+          
+        </div> <br><br>
+        <div class="carousel-caption">
+          <h1 style="color: white;">Guess the voice</h1>
+          <audio controls>
+            <source src="../../../assets/voice.mp3">
+          </audio><br>
+          <button mat-raised-button>Answer</button>
+        </div>
+    </ng-template>
     <ng-template ngbSlide *ngFor="let puzzle of puzzles">
         <div>
             <img src="../../../assets/puzzles/{{puzzle.filename}}">
@@ -40,6 +53,7 @@ interval="10000"
             <button #test mat-raised-button id='{{puzzle.id}}' color="primary" (click)="openDialog(test)">Answer</button>
         </div>
     </ng-template>
+    
     <ng-template ngbSlide *ngFor="let puzzle of answeredPuzzles">
       <div>
           <img src="../../../assets/puzzles/{{puzzle.filename}}">
