@@ -7,16 +7,16 @@
             <h3 style="color: green; font-weight: bold;">{{score}}
                 <img src="../../../../assets/coin.png" width="25px">
                 <!-- 2<img src="https://icons.iconarchive.com/icons/oxygen-icons.org/oxygen/256/Actions-help-hint-icon.png" width="25px"> -->
-                1 <img src="http://getdrawings.com/free-icon/key-icon-transparent-background-66.png" width="25px">
+                {{keyCount}} <img src="http://getdrawings.com/free-icon/key-icon-transparent-background-66.png" width="25px">
             </h3>
         </div>
     </div>
     <mat-divider></mat-divider>
     <h2 matSubheader>Pages</h2>
-    <a mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/leaderboard"><mat-icon>trending_up</mat-icon>Leaderboard</a>
+    <a mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/leaderboard"><mat-icon>trending_up</mat-icon>Kingdom Wealth</a>
     <a mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/team-info"><mat-icon>supervised_user_circle</mat-icon>Team Info</a>
     <a mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/quest"><mat-icon>question_answer</mat-icon>Today's Quest</a>
-    <a mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/puzzles"><mat-icon>dashboard</mat-icon>Puzzles</a>
+    <a mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/puzzles"><mat-icon>dashboard</mat-icon>Talk to Sage</a>
     <a mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/upload-image"><mat-icon>file_upload</mat-icon>Upload Image</a>
 </mat-nav-list>
 </div>

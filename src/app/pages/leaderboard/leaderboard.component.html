@@ -1,6 +1,7 @@
 <div style=" height: 100%; background-size: cover;  background-image: url('../../assets/bg2.jpg');">
     <br>
-    <mat-table [dataSource]="dataSource" style="width: 30%; height: fit-content; opacity: 0.8; margin-top: 10%; margin-left: 10%;">
+    <h1 style="margin-left: 5%; color: white;">Wealth only indicates the number of puzzles solved</h1>
+    <mat-table [dataSource]="dataSource" style="width: 30%; height: fit-content; opacity: 0.8; margin-top: 8%; margin-left: 10%;">
         <ng-container matColumnDef="teamName">
             <mat-header-cell *matHeaderCellDef>Kingdom</mat-header-cell>
             <mat-cell *matCellDef="let team">{{ team.teamName }}</mat-cell>

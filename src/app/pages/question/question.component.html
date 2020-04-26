@@ -2,7 +2,8 @@
 <div [ngStyle]="{'width': 'auto','display': 'flex','flex-direction': 'column','justify-content': 'center','text-align': 'center','background-image':currentImagePath,'height': '100%','background-size':'cover','background-position':'center-center'}">
     <div>
         <br>
-        <div *ngIf="shipEntry" [ngStyle]="{'width': 'fit-content','opacity':'0.7','justify-content': 'center','align-items': 'center'}">
+        <div *ngIf="shipEntry" [ngStyle]="{'width': 'fit-content','opacity':'0.7','justify-content': 'center','align-items': 'center', 'margin-left':'3%'}">
+            <br> <br><br><br><br><br><br><br>
             <mat-card>
                 <mat-card-title style="text-align: center;">You have almost reached the first secret city</mat-card-title>
                 <mat-card-content>
@@ -30,10 +31,10 @@
             </mat-card>
         </div>
         <div class="mat-elevation-z8" *ngIf="cityMain" [ngStyle]="{'width': 'fit-content','justify-content': 'center','align-items': 'center','opacity':'0.7'}">
-            <mat-card [ngStyle]="{'position':'relative', 'margin-left':'10%','width': 'fit-content','max-width':'100%'}">
+            <mat-card [ngStyle]="{'position':'relative', 'margin-left':'5%','width': 'fit-content','max-width':'100%','height':'fit-content'}">
                 <mat-card-title style="text-align: center;">Welcome to the City of Devipura</mat-card-title>
                 <mat-card-content>
-                    <h2>{{question}}</h2>
+                    <h2 >{{question}}</h2>
                     <mat-form-field appearance="standard">
                         <mat-label>Answer</mat-label>
                         <input matInput appearance="outline" [(ngModel)]="answer">

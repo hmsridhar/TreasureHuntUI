@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { BackendServices } from 'src/app/backend-services';
+import { StateManagementService } from 'src/app/state-management.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +11,17 @@ export class SidebarComponent implements OnInit {
 
   @Input() teamName: string;
   @Input() score: number;
-  constructor() { }
+  keyCount: number = 0;
+  subscription: any;
+  constructor(private backendService: BackendServices, private stateMgmtService: StateManagementService) { 
+    this.subscription = backendService.getPointsEventEmitter().subscribe(event => {
+      if(event!=null && event.type == "pointsChange"){
+        this.score += event.score;
+        this.stateMgmtService.refreshUserDetails();
+      }
+    });
+    this.keyCount = this.stateMgmtService.getTeamDay()-1;
+  }
 
   ngOnInit(): void {
   }

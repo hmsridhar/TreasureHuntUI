@@ -75,6 +75,7 @@ export class PuzzlesComponent implements OnInit {
     var elementToBeRemoved = this.puzzles[removeIndex];
     // console.log(elementToBeRemoved);
     if(eventType == "correct-ans"){
+      this.backendServices.emitPointsChangeEvent(2);
       elementToBeRemoved.teamAnswer=answer;
       alert('Yayy! That\'s the right answer');
       this.answeredPuzzles.push(elementToBeRemoved);

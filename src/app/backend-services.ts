@@ -11,6 +11,14 @@ export class BackendServices{
     pointsEventEmitter = new EventEmitter();
     constructor(private httpClient: HttpClient, private stateMgmtService: StateManagementService){}
     
+    getPointsEventEmitter(){
+        return this.pointsEventEmitter;
+    }
+
+    emitPointsChangeEvent(score: number){
+        this.pointsEventEmitter.emit({type: 'pointsChange', score : score})
+    }
+
     login(userCreds): any{
          return this.httpClient.post<any>(this.backendUrl+"/authenticate",userCreds,{observe:'response'})
          .pipe(
