@@ -29,8 +29,8 @@ interval="10000"
         <p>Consectetur tortor volutpat pretium.</p>
       </div>
     </ng-template> -->
-    <ng-template ngbSlide>
-        <div>
+    <!-- <ng-template ngbSlide>
+        <div >
           <img src="https://elearningbrothers.com/wp-content/uploads/2013/10/edgeaudio-575x405.jpg">
           
         </div> <br><br>
@@ -41,24 +41,37 @@ interval="10000"
           </audio><br>
           <button mat-raised-button>Answer</button>
         </div>
-    </ng-template>
+    </ng-template> -->
     <ng-template ngbSlide *ngFor="let puzzle of puzzles">
-        <div>
+      <div *ngIf="puzzle.type==='VOICE'">
+        <img src="https://elearningbrothers.com/wp-content/uploads/2013/10/edgeaudio-575x405.jpg">
+        
+      </div>
+        <div *ngIf="puzzle.type!='VOICE'">
             <img src="../../../assets/puzzles/{{puzzle.filename}}">
         </div>
         <br *ngIf="puzzle.question">
         <br><br><br><br>
         <div class="carousel-caption">
+          <audio controls *ngIf="puzzle.type=='VOICE'">
+            <source src="../../../assets/puzzles/{{puzzle.filename}}">
+          </audio>
           <h1 style="color: black; background-color: white;">{{puzzle.question}}</h1>
             <button #test mat-raised-button id='{{puzzle.id}}' color="primary" (click)="openDialog(test)">Answer</button>
         </div>
     </ng-template>
     
     <ng-template ngbSlide *ngFor="let puzzle of answeredPuzzles">
-      <div>
+      <div *ngIf="puzzle.type==='VOICE'">
+        <img src="https://elearningbrothers.com/wp-content/uploads/2013/10/edgeaudio-575x405.jpg">
+      </div>
+      <div *ngIf="puzzle.type!='VOICE'">
           <img src="../../../assets/puzzles/{{puzzle.filename}}">
       </div><br><br><br><br>
       <div class="carousel-caption">
+        <audio controls *ngIf="puzzle.type=='VOICE'">
+          <source src="../../../assets/puzzles/{{puzzle.filename}}">
+        </audio>
         <h1 style="color: black; background-color: white;">{{puzzle.question}}</h1>
         <h2 style="color: green; background-color: white;">Answer: {{puzzle.teamAnswer}}</h2>
           <!-- <button #test mat-raised-button id='{{puzzle.id}}' color="primary" (click)="openDialog(test)" disabled>Answer</button> -->

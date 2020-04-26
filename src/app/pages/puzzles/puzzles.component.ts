@@ -15,6 +15,7 @@ export class PuzzlesComponent implements OnInit {
   answeredPuzzles: PuzzleData[] = [];
   maxAttemptPuzzles: PuzzleData[] =[] ;
   currentPuzzle: number;
+  voiceType = "VOICE";
   
   constructor(public dialog: MatDialog, private backendServices: BackendServices) {
     // this.puzzles = [new PuzzleData('assets/board-game.jpg',1,"This is question 1 text you know"),

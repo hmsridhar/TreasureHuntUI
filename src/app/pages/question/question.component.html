@@ -21,6 +21,7 @@
                         <mat-label>Passkey</mat-label>
                         <input matInput appearance="outline" [(ngModel)]="passkey">
                     </mat-form-field><br>
+                    <h2 *ngIf="isLastGate">Combine the three keys you have to get the next key</h2>
                     <p *ngIf="invalidAnswer" style="color: red;">Wrong answer</p>
                 </mat-card-content>
                 <mat-card-actions >
@@ -67,10 +68,10 @@
                 <mat-card-actions >
                     <button mat-raised-button [disabled]="isPhotoUploaded" routerLink="/upload-image">Upload Image</button>
                     <button mat-raised-button (click)="getKey()" [disabled]="!isPhotoUploaded">{{keyButtonText}}</button>
+                    <button *ngIf="isTeamLaggingBehind" mat-raised-button style="width: fit-content; margin-left: 20%;" (click)="enterNextCity()">Go to next city</button>
                 </mat-card-actions>
             </mat-card>
         </div>
     </div>
-    <button *ngIf="isTeamLaggingBehind" mat-raised-button style="width: fit-content; margin-left: 20%;" (click)="enterNextCity()">Go to next city</button>
 </div>
 

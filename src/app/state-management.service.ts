@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { userData } from './global-models';
 import { BackendServices } from './backend-services';
 import { HttpClient } from '@angular/common/http';

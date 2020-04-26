@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
 import { userData, PassKey, Answer } from './global-models';
@@ -8,6 +8,7 @@ import { StateManagementService } from './state-management.service';
 export class BackendServices{
 
     backendUrl = "http://192.168.0.101:8081";
+    pointsEventEmitter = new EventEmitter();
     constructor(private httpClient: HttpClient, private stateMgmtService: StateManagementService){}
     
     login(userCreds): any{

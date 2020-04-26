@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class QuestionComponent implements OnInit {
 
   teamDay : number;
+  isLastGate = false;
   keyText: string;
   keyButtonText = "Get Key";
   keyAvailable : boolean;
@@ -45,7 +46,8 @@ export class QuestionComponent implements OnInit {
       this.isTeamLaggingBehind = true;
     }
     if(this.teamDay == 4){
-      this.keyButtonText = "Check Completion Status"
+      this.keyButtonText = "Check Completion Status";
+      this.isLastGate = true;
     }
     if(this.stateMgmtService.getHint()){
       this.hintText = "Hint: "+this.stateMgmtService.getHint();
