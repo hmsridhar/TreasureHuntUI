@@ -23,6 +23,7 @@ import { BackendServices } from 'src/app/backend-services';
         this.backendServices.submitPuzzleAnswer(this.puzzleId,this.answer).subscribe(response => {
           const message = response.body.message;
           if (message.indexOf('Max attempts reached') !== -1){
+            alert('Sorry. Max attempts reached');
             this.answerStatusEvent.emit({type: 'max-attempts', puzzleId: this.puzzleId});
           }
           else if (message.indexOf('Answer submitted successfully') !== -1){
