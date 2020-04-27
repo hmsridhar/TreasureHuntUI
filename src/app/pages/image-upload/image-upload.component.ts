@@ -58,7 +58,7 @@ export class ImageUploadComponent implements OnInit {
         this.isImageReadyToRender = false;
         this.fileToUpload = null;
         this.isFileUploadDone = true;
-        alert(response.body.message);
+        // alert(response.body.message);
       }      
     },error => {
       alert(error);

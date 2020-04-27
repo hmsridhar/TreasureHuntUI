@@ -7,7 +7,7 @@ import { StateManagementService } from './state-management.service';
 @Injectable({providedIn: 'root'})
 export class BackendServices{
 
-    backendUrl = "http://192.168.0.101:8081";
+    backendUrl = "http://192.168.113.17:8081";
     pointsEventEmitter = new EventEmitter();
     constructor(private httpClient: HttpClient, private stateMgmtService: StateManagementService){}
     

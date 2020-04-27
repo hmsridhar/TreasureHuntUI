@@ -63,29 +63,37 @@ export class PuzzlesComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       // this.refresh();
+      location.reload();
       console.log('The dialog was closed');
       eventListener.unsubscribe();
     });
   }
 
   reshufflePuzzles(eventType: string, puzzleId: number, answer: string){
+    location.reload();
+    console.log('Reshuffle puzzle called');
     var idMap = this.puzzles.map(function(element){ return element.id});
     var removeIndex = idMap.findIndex(element => element == puzzleId);
     
     var elementToBeRemoved = this.puzzles[removeIndex];
+    console.log('Element to be remove is'+elementToBeRemoved);
     // console.log(elementToBeRemoved);
     if(eventType == "correct-ans"){
       this.backendServices.emitPointsChangeEvent(2);
       elementToBeRemoved.teamAnswer=answer;
+      // window.alert = null;
       alert('Yayy! That\'s the right answer');
+      // delete window.alert;
       this.answeredPuzzles.push(elementToBeRemoved);
     }else if(eventType == "max-attempts"){
       alert('Max Attempts reached, question disabled!')
       this.maxAttemptPuzzles.push(elementToBeRemoved);
     }
     this.puzzles.splice(removeIndex,1);
+    console.log('element removed');
+    // location.reload();
     // console.log('original')
-    console.log(this.puzzles);
+    // console.log(this.puzzles);
     // console.log('answered')
     // console.log(this.answeredPuzzles);
   }

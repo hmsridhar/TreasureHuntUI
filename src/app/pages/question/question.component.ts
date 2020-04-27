@@ -119,7 +119,7 @@ export class QuestionComponent implements OnInit {
 
   enterCity(){
     this.backendServices.reachCity().subscribe(response => {
-      alert(response.body.message);
+      // alert(response.body.message);
       this.stateMgmtService.refreshUserDetails();
       this.showCityGate();
     })
