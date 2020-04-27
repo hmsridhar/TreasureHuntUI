@@ -14,6 +14,7 @@ export class SidebarComponent implements OnInit {
   keyCount: number = 0;
   subscription: any;
   constructor(private backendService: BackendServices, private stateMgmtService: StateManagementService) { 
+    this.keyCount = 0;
     this.subscription = backendService.getPointsEventEmitter().subscribe(event => {
       if(event!=null && event.type == "pointsChange"){
         this.score += event.score;
