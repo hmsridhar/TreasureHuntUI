@@ -70,7 +70,7 @@ export class PuzzlesComponent implements OnInit {
   }
 
   reshufflePuzzles(eventType: string, puzzleId: number, answer: string){
-    location.reload();
+    // location.reload();
     console.log('Reshuffle puzzle called');
     var idMap = this.puzzles.map(function(element){ return element.id});
     var removeIndex = idMap.findIndex(element => element == puzzleId);

@@ -43,12 +43,13 @@ interval="10000"
         </div>
     </ng-template> -->
     <ng-template ngbSlide *ngFor="let puzzle of puzzles">
+      <h3 style="background-color: white; color: black; background-color: #FFD700; width: fit-content;">Puzzle {{puzzle.id}}</h3>
       <div *ngIf="puzzle.type==='VOICE'">
         <img src="https://elearningbrothers.com/wp-content/uploads/2013/10/edgeaudio-575x405.jpg">
         
       </div>
         <div *ngIf="puzzle.type!='VOICE'">
-            <img src="../../../assets/puzzles/{{puzzle.filename}}">
+            <img src="../../../assets/puzzles/{{puzzle.filename}}"> 
         </div>
         <br *ngIf="puzzle.question">
         <br><br><br><br>
@@ -62,6 +63,7 @@ interval="10000"
     </ng-template>
     
     <ng-template ngbSlide *ngFor="let puzzle of answeredPuzzles">
+      <h3 style="background-color: white; color: black; background-color: #FFD700; width: fit-content;">Puzzle {{puzzle.id}}</h3>
       <div *ngIf="puzzle.type==='VOICE'">
         <img src="https://elearningbrothers.com/wp-content/uploads/2013/10/edgeaudio-575x405.jpg">
       </div>
@@ -78,7 +80,11 @@ interval="10000"
       </div>
   </ng-template>
   <ng-template ngbSlide *ngFor="let puzzle of maxAttemptPuzzles">
-    <div>
+    <h3 style="background-color: white; color: black; background-color: #FFD700; width: fit-content;">Puzzle {{puzzle.id}}</h3>
+    <div *ngIf="puzzle.type==='VOICE'">
+      <img src="https://elearningbrothers.com/wp-content/uploads/2013/10/edgeaudio-575x405.jpg">
+    </div>
+    <div *ngIf="puzzle.type!='VOICE'">
         <img src="../../../assets/puzzles/{{puzzle.filename}}">
     </div>
     <br><br><br><br><br>

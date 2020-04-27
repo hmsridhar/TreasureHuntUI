@@ -5,7 +5,7 @@
         <div *ngIf="shipEntry" [ngStyle]="{'width': 'fit-content','opacity':'0.7','justify-content': 'center','align-items': 'center', 'margin-left':'3%'}">
             <br> <br><br><br><br><br><br><br>
             <mat-card>
-                <mat-card-title style="text-align: center;">You have almost reached the first secret city</mat-card-title>
+                <mat-card-title style="text-align: center;">You have almost reached the {{cityPos}} secret city</mat-card-title>
                 <mat-card-content>
                 </mat-card-content>
                 <mat-card-actions>
@@ -32,10 +32,10 @@
         </div>
         <div class="mat-elevation-z8" *ngIf="cityMain" [ngStyle]="{'width': 'fit-content','justify-content': 'center','align-items': 'center','opacity':'0.7'}">
             <mat-card [ngStyle]="{'position':'relative', 'margin-left':'15%','width': 'fit-content','max-width':'100%','height':'fit-content'}">
-                <mat-card-title style="text-align: center;">Welcome to the City of Devipura</mat-card-title>
+                <mat-card-title style="text-align: center;">Welcome to the City of {{cityName}}</mat-card-title>
                 <mat-card-content>
-                    <h2 >{{question}}</h2>
-                    <img src="../../../assets//q1.png" style="height: 420px;">
+                    <!-- <h2 >{{question}}</h2> -->
+                    <img src="../../../assets//{{question}}" style="height: 420px;">
                     <mat-form-field appearance="standard">
                         <mat-label>Answer</mat-label>
                         <input matInput appearance="outline" [(ngModel)]="answer" placeholder="Enter forest name">
@@ -54,7 +54,7 @@
             </mat-card>
         </div>
         <div class="mat-elevation-z8" *ngIf="shipExit" [ngStyle]="{'width': 'fit-content','justify-content': 'center','align-items': 'center','opacity':'0.7'}">
-            <mat-card [ngStyle]="{'position':'relative', 'margin-left':'10%','width':'fit-content','max-width':'70%'}">
+            <mat-card [ngStyle]="{'position':'relative', 'margin-left':'10%','width':'fit-content','max-width':'90%'}">
                 <mat-card-title style="text-align: center;">Well done saviours!</mat-card-title>
                 <mat-card-content>
                         <h2>You have successfully completed this day's challenge</h2>

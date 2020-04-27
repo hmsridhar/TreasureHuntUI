@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 export class QuestionComponent implements OnInit {
 
   teamDay : number;
+  cityName: string;
+  cityPos : string;
   isLastGate = false;
   keyText: string;
   keyButtonText = "Get Key";
@@ -85,10 +87,10 @@ export class QuestionComponent implements OnInit {
   getDayObject(){
     var dayObj : DayImageDetails = null;
     switch(this.teamDay){
-      case 1: dayObj = this.imageDetails.day1; break;
-      case 2: dayObj = this.imageDetails.day2; break;
-      case 3: dayObj = this.imageDetails.day3; break;
-      case 4: dayObj = this.imageDetails.day4; break;
+      case 1: dayObj = this.imageDetails.day1; this.cityName = "Devipura"; this.cityPos="first"; break;
+      case 2: dayObj = this.imageDetails.day2; this.cityName = "Secondapura";this.cityPos="second"; break;
+      case 3: dayObj = this.imageDetails.day3; this.cityName = "Thirdapura";this.cityPos="third"; break;
+      case 4: dayObj = this.imageDetails.day4; this.cityName = "Fourthapura";this.cityPos="fourth"; break;
     }
     return dayObj;
   }
