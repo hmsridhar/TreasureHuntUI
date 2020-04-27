@@ -15,28 +15,31 @@ import { BackendServices } from 'src/app/backend-services';
     @Inject(MAT_DIALOG_DATA) data: Puz, private backendServices: BackendServices){
         this.puzzleId = data.puzzleId;
     }
-  
+
     onClick(){
-        if(!this.answer){
+        if (!this.answer){
           alert('Answer cannot be empty');
         }else{
         this.backendServices.submitPuzzleAnswer(this.puzzleId,this.answer).subscribe(response => {
-          if(response.body.message == "Max attempts reached"){
-            this.answerStatusEvent.emit({type: 'max-attempts',puzzleId: this.puzzleId});
+          const message = response.body.message;
+          if (message.indexOf('Max attempts reached') !== -1){
+            this.answerStatusEvent.emit({type: 'max-attempts', puzzleId: this.puzzleId});
           }
-          else if(response.body.message == "Answer submitted successfully"){
+          else if (message.indexOf('Answer submitted successfully') !== -1){
             // alert(response.body.message);
-            this.answerStatusEvent.emit({type: 'correct-ans',puzzleId: this.puzzleId,answer: this.answer});
+            this.answerStatusEvent.emit({type: 'correct-ans', puzzleId: this.puzzleId, answer: this.answer});
+          }else if (message.indexOf('Incorrect answer') !== -1){
+            const messages = message.split(':');
+            alert('Sorry. Your answer is wrong ! \nAttempts Tried Count : ' + messages[1]);
           }
-        })
+        });
         // console.log(this.puzzleId);
         // console.log(this.answer);
         }
         this.dialogRef.close();
     }
   }
-  
-  export class Puz{
+
+export class Puz{
     puzzleId: number;
   }
-  

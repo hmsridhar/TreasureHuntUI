@@ -63,7 +63,7 @@ export class PuzzlesComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       // this.refresh();
-      location.reload();
+     // location.reload();
       console.log('The dialog was closed');
       eventListener.unsubscribe();
     });
