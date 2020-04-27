@@ -24,11 +24,13 @@ import { BackendServices } from 'src/app/backend-services';
           const message = response.body.message;
           if (message.indexOf('Max attempts reached') !== -1){
             alert('Sorry. Max attempts reached');
-            this.answerStatusEvent.emit({type: 'max-attempts', puzzleId: this.puzzleId});
+            location.reload();
+           // this.answerStatusEvent.emit({type: 'max-attempts', puzzleId: this.puzzleId});
           }
           else if (message.indexOf('Answer submitted successfully') !== -1){
             // alert(response.body.message);
-            this.answerStatusEvent.emit({type: 'correct-ans', puzzleId: this.puzzleId, answer: this.answer});
+            location.reload();
+           // this.answerStatusEvent.emit({type: 'correct-ans', puzzleId: this.puzzleId, answer: this.answer});
           }else if (message.indexOf('Incorrect answer') !== -1){
             const messages = message.split(':');
             alert('Sorry. Your answer is wrong ! \nAttempts Tried Count : ' + messages[1]);
