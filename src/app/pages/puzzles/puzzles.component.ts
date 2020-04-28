@@ -79,7 +79,7 @@ export class PuzzlesComponent implements OnInit {
     console.log('Element to be remove is'+elementToBeRemoved);
     // console.log(elementToBeRemoved);
     if(eventType == "correct-ans"){
-      this.backendServices.emitPointsChangeEvent(2);
+      // this.backendServices.emitPointsChangeEvent(2);
       elementToBeRemoved.teamAnswer=answer;
       // window.alert = null;
       alert('Yayy! That\'s the right answer');

@@ -1,13 +1,13 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
-import { userData, PassKey, Answer } from './global-models';
+import { userData, PassKey, Answer, PointsEvent } from './global-models';
 import { StateManagementService } from './state-management.service';
 
 @Injectable({providedIn: 'root'})
 export class BackendServices{
 
-    backendUrl = "http://192.168.113.6:8081";
+    backendUrl = "http://localhost:8081";
     pointsEventEmitter = new EventEmitter();
     constructor(private httpClient: HttpClient, private stateMgmtService: StateManagementService){}
     
@@ -15,8 +15,8 @@ export class BackendServices{
         return this.pointsEventEmitter;
     }
 
-    emitPointsChangeEvent(score: number){
-        this.pointsEventEmitter.emit({type: 'pointsChange', score : score})
+    emitPointsChangeEvent(pointsevent: PointsEvent){
+        this.pointsEventEmitter.emit(pointsevent)
     }
 
     login(userCreds): any{

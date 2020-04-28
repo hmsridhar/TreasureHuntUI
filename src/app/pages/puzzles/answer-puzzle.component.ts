@@ -28,6 +28,7 @@ import { BackendServices } from 'src/app/backend-services';
            // this.answerStatusEvent.emit({type: 'max-attempts', puzzleId: this.puzzleId});
           }
           else if (message.indexOf('Answer submitted successfully') !== -1){
+            this.backendServices.emitPointsChangeEvent({type: 'pointsChange',score:2});
             alert("That's correct!");
             location.reload();
            // this.answerStatusEvent.emit({type: 'correct-ans', puzzleId: this.puzzleId, answer: this.answer});

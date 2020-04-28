@@ -16,6 +16,7 @@ export class QuestionComponent implements OnInit {
   cityPos : string;
   isLastGate = false;
   keyText: string;
+  filename: string;
   keyButtonText = "Get Key";
   keyAvailable : boolean;
   question: string;
@@ -88,7 +89,7 @@ export class QuestionComponent implements OnInit {
     var dayObj : DayImageDetails = null;
     switch(this.teamDay){
       case 1: dayObj = this.imageDetails.day1; this.cityName = "Devipura"; this.cityPos="first"; break;
-      case 2: dayObj = this.imageDetails.day2; this.cityName = "Secondapura";this.cityPos="second"; break;
+      case 2: dayObj = this.imageDetails.day2; this.cityName = "Teshwasara";this.cityPos="second"; break;
       case 3: dayObj = this.imageDetails.day3; this.cityName = "Thirdapura";this.cityPos="third"; break;
       case 4: dayObj = this.imageDetails.day4; this.cityName = "Fourthapura";this.cityPos="fourth"; break;
     }
@@ -107,6 +108,7 @@ export class QuestionComponent implements OnInit {
   showCityMain(){
     this.backendServices.getQuestion().subscribe(response=>{
       this.question = response.text;
+      this.filename = response.filename;
     })
     this.currentImagePath = this.dayObj.stage3img;
     this.cityGate = false;
@@ -188,6 +190,7 @@ export class QuestionComponent implements OnInit {
         this.showSolvePuzzleButton = false;
         this.hintText = "Hint: "+response.body.clue;
         console.log(this.hintText);
+        this.backendServices.emitPointsChangeEvent({type:'hintTaken',score:16})
         this.stateMgmtService.refreshUserDetails();
       }
       else{

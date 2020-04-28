@@ -134,3 +134,8 @@ export class Answer{
         this.answer = answer;
     }
 }
+
+export class PointsEvent{
+    type: string;
+    score: number;
+}

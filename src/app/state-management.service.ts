@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 @Injectable({providedIn: 'root'})
 export class StateManagementService{
     
-    backendUrl = "http://192.168.113.6:8081";
+    backendUrl = "http://localhost:8081";
     username: string;
     teamName: string;
     userType: string;

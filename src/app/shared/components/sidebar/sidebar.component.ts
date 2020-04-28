@@ -19,6 +19,8 @@ export class SidebarComponent implements OnInit {
       if(event!=null && event.type == "pointsChange"){
         this.score += event.score;
         this.stateMgmtService.refreshUserDetails();
+      }else if(event!=null && event.type == "hintTaken"){
+        this.score -= event.score;
       }
     });
     this.keyCount = this.stateMgmtService.getTeamDay()-1;

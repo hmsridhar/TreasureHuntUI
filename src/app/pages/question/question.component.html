@@ -34,8 +34,8 @@
             <mat-card [ngStyle]="{'position':'relative', 'margin-left':'15%','width': 'fit-content','max-width':'100%','height':'fit-content'}">
                 <mat-card-title style="text-align: center;">Welcome to the City of {{cityName}}</mat-card-title>
                 <mat-card-content>
-                    <!-- <h2 >{{question}}</h2> -->
-                    <img src="../../../assets//{{question}}" style="height: 420px;">
+                    <img src="../../../assets//{{filename}}" style="height: 420px;">
+                    <!-- <h2 style="width: 50%; text-align: center;">{{question}}</h2> -->
                     <mat-form-field appearance="standard">
                         <mat-label>Answer</mat-label>
                         <input matInput appearance="outline" [(ngModel)]="answer" placeholder="Enter forest name">
@@ -52,6 +52,11 @@
                     <button mat-raised-button (click)="submitAnswer()">Submit Answer</button>
                 </mat-card-actions>
             </mat-card>
+            <div class="mat-elevation-z8" *ngIf="cityMain && question" [ngStyle]="{'width': 'fit-content','justify-content': 'center','align-items': 'center','opacity':'0.9'}">
+                <mat-card [ngStyle]="{'position':'relative', 'margin-left':'15%','width': '64%','max-width':'100%','height':'fit-content'}">
+                    <mat-card-content><h3 style="font-size: 15px; font-weight: bold;">Text to use: {{question}}</h3></mat-card-content>
+                </mat-card>
+            </div>
         </div>
         <div class="mat-elevation-z8" *ngIf="shipExit" [ngStyle]="{'width': 'fit-content','justify-content': 'center','align-items': 'center','opacity':'0.7'}">
             <mat-card [ngStyle]="{'position':'relative', 'margin-left':'10%','width':'fit-content','max-width':'90%'}">
