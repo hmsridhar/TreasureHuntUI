@@ -23,9 +23,11 @@ export class QuestionComponent implements OnInit {
   teamStage: number;
   showSolvePuzzleButton = false;
   hintText: string;
+  gotHint = false;
   hintUnlocked = false;
   currentImagePath: string;
   passkey: string;
+  placeholder: string;
   answer: string;
   shipEntry = false;
   cityGate = false;
@@ -41,6 +43,7 @@ export class QuestionComponent implements OnInit {
 
   constructor(private stateMgmtService: StateManagementService,
     private backendServices: BackendServices,private router: Router ) { 
+      this.placeholder="";
     // this.currentImagePath = "url('../../assets/ship.jpg')";
     this.teamDay = this.stateMgmtService.getTeamDay();
     this.teamStage = this.stateMgmtService.getTeamStage();
@@ -55,7 +58,9 @@ export class QuestionComponent implements OnInit {
     if(this.stateMgmtService.getHint()){
       this.hintText = "Hint: "+this.stateMgmtService.getHint();
     }
-    if(this.hintText != "" || this.hintText != undefined){
+    if(this.hintText != "" && this.hintText != undefined && this.hintText){
+      if(this.hintText.includes("Hint:"))
+        this.gotHint = true;
       this.hintUnlocked = true;
     } 
     if(this.stateMgmtService.getTeamImageUploadStatus() == "done"){
@@ -88,8 +93,8 @@ export class QuestionComponent implements OnInit {
   getDayObject(){
     var dayObj : DayImageDetails = null;
     switch(this.teamDay){
-      case 1: dayObj = this.imageDetails.day1; this.cityName = "Devipura"; this.cityPos="first"; break;
-      case 2: dayObj = this.imageDetails.day2; this.cityName = "Teshwasara";this.cityPos="second"; break;
+      case 1: dayObj = this.imageDetails.day1; this.cityName = "Devipura"; this.cityPos="first"; this.placeholder="Enter forest name"; break;
+      case 2: dayObj = this.imageDetails.day2; this.cityName = "Teshwasara";this.cityPos="second";  break;
       case 3: dayObj = this.imageDetails.day3; this.cityName = "Thirdapura";this.cityPos="third"; break;
       case 4: dayObj = this.imageDetails.day4; this.cityName = "Fourthapura";this.cityPos="fourth"; break;
     }

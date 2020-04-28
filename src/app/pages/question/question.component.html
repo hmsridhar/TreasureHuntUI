@@ -38,7 +38,7 @@
                     <!-- <h2 style="width: 50%; text-align: center;">{{question}}</h2> -->
                     <mat-form-field appearance="standard">
                         <mat-label>Answer</mat-label>
-                        <input matInput appearance="outline" [(ngModel)]="answer" placeholder="Enter forest name">
+                        <input matInput appearance="outline" [(ngModel)]="answer" placeholder="{{placeholder}}">
                     </mat-form-field>
                     <br>
                     <h3 *ngIf="hintUnlocked" style="color: green;">{{hintText}}</h3>
@@ -46,7 +46,7 @@
                     <h3 style="color: red;">{{answerStatus}}</h3>
                 </mat-card-content>
                 <mat-card-actions >
-                    <button mat-raised-button (click)="getHint()">
+                    <button mat-raised-button (click)="getHint()" [disabled]="gotHint">
                         <mat-icon>contact_support</mat-icon>Get Hint
                     </button>
                     <button mat-raised-button (click)="submitAnswer()">Submit Answer</button>
