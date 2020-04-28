@@ -44,6 +44,7 @@
                     <h3 *ngIf="hintUnlocked" style="color: green;">{{hintText}}</h3>
                     <button *ngIf="showSolvePuzzleButton" mat-raised-button routerLink="/puzzles">Solve puzzles</button>
                     <h3 style="color: red;">{{answerStatus}}</h3>
+                    <h4 style="font-weight: bold;" *ngIf="placeholder">The royal guards on searching raghava's cottage have found few winter essentials</h4>
                 </mat-card-content>
                 <mat-card-actions >
                     <button mat-raised-button (click)="getHint()" [disabled]="gotHint">
