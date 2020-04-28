@@ -39,6 +39,7 @@ export class BackendServices{
                 this.stateMgmtService.setTeamId(data.teamId);
                 this.stateMgmtService.setCurrentDay(data.currentDay);
                 this.stateMgmtService.setTeamDay(data.teamDay);
+                console.log(this.stateMgmtService.getTeamDay());
                 this.stateMgmtService.setTeamStage(data.teamStage);
                 this.stateMgmtService.setTeamImageUploadStatus(data.teamImageUploadStatus);
                 // this.stateMgmtService.refreshUserDetails();
