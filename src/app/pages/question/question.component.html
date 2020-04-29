@@ -22,6 +22,9 @@
                         <mat-label>Passkey</mat-label>
                         <input matInput appearance="outline" [(ngModel)]="passkey">
                     </mat-form-field><br>
+                    <!-- <mat-form-field appearance="outline" [style.width.px]="40" *ngFor="let ans of inpButtons">
+                        <input matInput type="number" min="0" max="9" id={{ans}}>
+                    </mat-form-field> -->
                     <h2 *ngIf="isLastGate">Combine the three keys you have to get the next key</h2>
                     <p *ngIf="invalidAnswer" style="color: red;">Wrong answer</p>
                 </mat-card-content>

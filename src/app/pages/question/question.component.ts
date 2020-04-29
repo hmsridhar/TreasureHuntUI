@@ -40,6 +40,7 @@ export class QuestionComponent implements OnInit {
   answerStatus: string;
   isTeamLaggingBehind = false;
   hasCompletedFinalChallenge = false;
+  inpButtons = ["inp1","inp2","inp3","inp4","inp5","inp6","inp7","inp8","inp9"]
 
   constructor(private stateMgmtService: StateManagementService,
     private backendServices: BackendServices,private router: Router ) { 
@@ -81,7 +82,7 @@ export class QuestionComponent implements OnInit {
       case 1: this.showShipEntry(); break;
       case 2: this.showCityGate(); break;
       case 3: this.showCityMain(); break;
-      case 4: this.showShipExit(); break;
+      case 4: this.showShipExit(); break; 
       case 5: this.showShipExit(); break;
       // case 
     }  
@@ -95,7 +96,7 @@ export class QuestionComponent implements OnInit {
     switch(this.teamDay){
       case 1: dayObj = this.imageDetails.day1; this.cityName = "Devipura"; this.cityPos="first"; this.placeholder="Enter forest"; break;
       case 2: dayObj = this.imageDetails.day2; this.cityName = "Teshwasara";this.cityPos="second";  break;
-      case 3: dayObj = this.imageDetails.day3; this.cityName = "Thirdapura";this.cityPos="third"; break;
+      case 3: dayObj = this.imageDetails.day3; this.cityName = "Operipuram";this.cityPos="third"; break;
       case 4: dayObj = this.imageDetails.day4; this.cityName = "Fourthapura";this.cityPos="fourth"; break;
     }
     return dayObj;
@@ -138,6 +139,9 @@ export class QuestionComponent implements OnInit {
   }
 
   openGateIfAnswerValid(){
+    if(this.isLastGate){
+
+    }
     if(this.passkey == "" || this.passkey == undefined){
       this.invalidAnswer = true;
       // alert('Passkey cannot be empty!');
