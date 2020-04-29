@@ -7,7 +7,7 @@ import { StateManagementService } from './state-management.service';
 @Injectable({providedIn: 'root'})
 export class BackendServices{
 
-    backendUrl = "http://192.168.113.13:8081";
+    backendUrl = "http://192.168.113.26:8081";
     // backendUrl = "http://localhost:8081";
     pointsEventEmitter = new EventEmitter();
     constructor(private httpClient: HttpClient, private stateMgmtService: StateManagementService){}
@@ -23,7 +23,7 @@ export class BackendServices{
     login(userCreds): any{
          return this.httpClient.post<any>(this.backendUrl+"/authenticate",userCreds,{observe:'response'})
          .pipe(
-             tap(response => {
+             tap(response => { 
                 response.headers.keys()
                 var data = new userData(userCreds.username,response.headers.get('Authorization'),
                 parseInt(response.headers.get('teamId')),userCreds.username,0,parseInt(response.headers.get('currentDay')),

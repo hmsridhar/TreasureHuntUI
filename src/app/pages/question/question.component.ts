@@ -184,7 +184,10 @@ export class QuestionComponent implements OnInit {
         alert('Game completed!');
       }
       else {
-      this.keyText = "Your key for the day is "+response.body.key+". Please keep this key safe, as it might be required later";
+        if(response.body.key.includes('Congrats!'))
+          this.keyText = response.body.key;
+        else
+          this.keyText = "Your key for the day is "+response.body.key+". Please keep this key safe, as it might be required later";
       }
     },error =>{
       this.keyText = "Your team image has not yet been approved";
