@@ -40,10 +40,16 @@ export class QuestionComponent implements OnInit {
   answerStatus: string;
   isTeamLaggingBehind = false;
   hasCompletedFinalChallenge = false;
-  inpButtons = ["inp1","inp2","inp3","inp4","inp5","inp6","inp7","inp8","inp9"]
+  showCave = false;
+  inpButtons = ["inp1","inp2","inp3","inp4","inp5","inp6","inp7","inp8","inp9"];
+  in1=0; in2=0; in3=0; in4=0; in5=0; in6=0; in7=0; in8=0; in9=0;
+  isGameCompleted = false;
 
   constructor(private stateMgmtService: StateManagementService,
     private backendServices: BackendServices,private router: Router ) { 
+      this.isGameCompleted = this.stateMgmtService.getGameCompleted();
+      if(this.isGameCompleted)
+        this.showCave = true;
       this.placeholder="";
     // this.currentImagePath = "url('../../assets/ship.jpg')";
     this.teamDay = this.stateMgmtService.getTeamDay();
@@ -82,8 +88,18 @@ export class QuestionComponent implements OnInit {
       case 1: this.showShipEntry(); break;
       case 2: this.showCityGate(); break;
       case 3: this.showCityMain(); break;
-      case 4: this.showShipExit(); break; 
-      case 5: this.showShipExit(); break;
+      case 4: if(this.teamDay!=4)this.showShipExit(); else this.showFinalQuestion(); break; 
+      case 5: 
+      console.log(this.stateMgmtService.getGameCompleted());
+        if(this.teamDay!=4)this.showShipExit();
+        else if(this.stateMgmtService.getGameCompleted() == true && this.teamDay == 4){
+          this.isGameCompleted = true; 
+          this.currentImagePath="url('../../assets/day4/final.jpg')";
+          this.showCave = false;
+        }
+        
+        else this.showFinalQuestion(); 
+        break; 
       // case 
     }  
   }
@@ -94,10 +110,10 @@ export class QuestionComponent implements OnInit {
   getDayObject(){
     var dayObj : DayImageDetails = null;
     switch(this.teamDay){
-      case 1: dayObj = this.imageDetails.day1; this.cityName = "Devipura"; this.cityPos="first"; this.placeholder="Enter forest"; break;
-      case 2: dayObj = this.imageDetails.day2; this.cityName = "Teshwasara";this.cityPos="second";  break;
-      case 3: dayObj = this.imageDetails.day3; this.cityName = "Operipuram";this.cityPos="third"; break;
-      case 4: dayObj = this.imageDetails.day4; this.cityName = "Fourthapura";this.cityPos="fourth"; break;
+      case 1: dayObj = this.imageDetails.day1; this.cityName = "Devipura"; this.cityPos="first secret city"; this.placeholder="Enter forest"; break;
+      case 2: dayObj = this.imageDetails.day2; this.cityName = "Teshwasara";this.cityPos="second secret city";  break;
+      case 3: dayObj = this.imageDetails.day3; this.cityName = "Operipuram";this.cityPos="third secret city"; break;
+      case 4: dayObj = this.imageDetails.day4; this.cityName = "Manikyaranya";this.cityPos="fourth secret place - Forest"; break;
     }
     return dayObj;
   }
@@ -131,7 +147,13 @@ export class QuestionComponent implements OnInit {
     this.backendServices.reachCity().subscribe(response => {
       // alert(response.body.message);
       this.stateMgmtService.refreshUserDetails();
-      this.showCityGate();
+      if(this.stateMgmtService.getTeamDay() == 4){
+        this.shipEntry = false;
+        this.cityGate = false;
+        this.showCityMain();
+      }
+      else
+        this.showCityGate();
     })
     // this.currentImagePath ="url('../../assets/day1/door.jpg')";
     // this.shipEntry = false;
@@ -166,11 +188,16 @@ export class QuestionComponent implements OnInit {
           this.answerStatus = response.message;
       }else if(response.message == "Answer submitted successfully"){
         this.stateMgmtService.refreshUserDetails();
+        // if(this.teamDay == 4){
+        //   this.hasCompletedFinalChallenge = true;
+        //   this.keyButtonText = "Check Completion Status";
+        // }
         if(this.teamDay == 4){
-          this.hasCompletedFinalChallenge = true;
-          this.keyButtonText = "Check Completion Status";
-        }
+          this.showFinalQuestion();
+          this.answer ="";
+        }else{
         this.showShipExit();
+        }
       }
     });
   }
@@ -224,5 +251,33 @@ export class QuestionComponent implements OnInit {
     },error =>{
       alert(error);
     })
+  }
+
+  showFinalQuestion(){
+    this.cityMain = false;
+    this.showCave = true;
+    this.backendServices.getFinalQuestion().subscribe(response =>{
+      this.question = response.body.text;
+      this.filename = response.body.filename;
+      // console.log(response);
+      this.currentImagePath="url('../../assets/day4/cave.jpg')";
+    })
+  }
+  submitFinalAnswer(){
+    var ans: string = this.in1.toString()+this.in2.toString()+this.in3.toString()+this.in4.toString()+this.in5.toString()+this.in6.toString()+
+    this.in7.toString()+this.in8.toString()+this.in9.toString();
+    this.backendServices.submitFinalAnswer(ans).subscribe(response=>{
+      if(response.body.message.includes("Answer submitted successfully")){
+        // alert('Hurray! You have successfully completed the game! Upload your team image to confirm your team win status');
+        this.showCave = false;
+        this.isGameCompleted = true;
+        this.stateMgmtService.refreshUserDetails();
+        this.currentImagePath="url('../../assets/day4/final.jpg')";
+        // this.router.navigate(['event-summary'])
+      }else
+        alert(response.body.message);
+    },error=>{
+      alert(error);
+    });
   }
 }

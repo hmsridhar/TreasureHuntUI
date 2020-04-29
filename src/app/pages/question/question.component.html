@@ -5,11 +5,11 @@
         <div *ngIf="shipEntry" [ngStyle]="{'width': 'fit-content','opacity':'0.7','justify-content': 'center','align-items': 'center', 'margin-left':'3%'}">
             <br> <br><br><br><br><br><br><br>
             <mat-card>
-                <mat-card-title style="text-align: center;">You have almost reached the {{cityPos}} secret city</mat-card-title>
+                <mat-card-title style="text-align: center;">You have almost reached the {{cityPos}}</mat-card-title>
                 <mat-card-content>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-raised-button (click)="enterCity()">Enter City</button>
+                    <button mat-raised-button (click)="enterCity()">Enter</button>
                 </mat-card-actions>
             </mat-card>
         </div>
@@ -82,6 +82,54 @@
                     <button *ngIf="isTeamLaggingBehind" mat-raised-button style="width: fit-content; margin-left: 20%;" (click)="enterNextCity()">Go to next city</button>
                 </mat-card-actions>
             </mat-card>
+        </div>
+        <div class="mat-elevation-z8" *ngIf="showCave" [ngStyle]="{'width': 'fit-content','justify-content': 'center','align-items': 'center','opacity':'0.7'}">
+            <mat-card [ngStyle]="{'position':'relative', 'margin-left':'10%','width':'fit-content','max-width':'90%'}">
+                <mat-card-title style="text-align: center;">Final challenge!</mat-card-title>
+                <mat-card-content>
+                    <img src="../../../assets//{{filename}}" style="height: 320px; ">&nbsp; <br>
+                    <mat-form-field appearance="standard" [style.width.px]="25">
+                        <input matInput appearance="outline" type="number" min="0" max="9" [(ngModel)]="in1">
+                    </mat-form-field>&nbsp;
+                    <mat-form-field appearance="standard" [style.width.px]="25">
+                        <input matInput appearance="outline" type="number" min="0" max="9" [(ngModel)]="in2">
+                    </mat-form-field>&nbsp;
+                    <mat-form-field appearance="standard" [style.width.px]="25">
+                        <input matInput appearance="outline" type="number" min="0" max="9" [(ngModel)]="in3">
+                    </mat-form-field>&nbsp;
+                    <mat-form-field appearance="standard" [style.width.px]="25">
+                        <input matInput appearance="outline" type="number" min="0" max="9" [(ngModel)]="in4">
+                    </mat-form-field>&nbsp;
+                    <mat-form-field appearance="standard" [style.width.px]="25">
+                        <input matInput appearance="outline" type="number" min="0" max="9" [(ngModel)]="in5">
+                    </mat-form-field>&nbsp;
+                    <mat-form-field appearance="standard" [style.width.px]="25">
+                        <input matInput appearance="outline" type="number" min="0" max="9" [(ngModel)]="in6">
+                    </mat-form-field>&nbsp;
+                    <mat-form-field appearance="standard" [style.width.px]="25">
+                        <input matInput appearance="outline" type="number" min="0" max="9" [(ngModel)]="in7">
+                    </mat-form-field>&nbsp;
+                    <mat-form-field appearance="standard" [style.width.px]="25">
+                        <input matInput appearance="outline" type="number" min="0" max="9" [(ngModel)]="in8">
+                    </mat-form-field>&nbsp;
+                    <mat-form-field appearance="standard" [style.width.px]="25">
+                        <input matInput appearance="outline" type="number" min="0" max="9" [(ngModel)]="in9">
+                    </mat-form-field>
+                    <br>
+                    <h3 style="color: red;">{{answerStatus}}</h3>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-raised-button (click)="submitFinalAnswer()">Submit Answer</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+        <div class="mat-elevation-z8" *ngIf="isGameCompleted" [ngStyle]="{'width': 'fit-content','justify-content': 'center','align-items': 'center','opacity':'0.7'}">
+            <mat-card [ngStyle]="{'position':'relative', 'margin-left':'10%','width':'fit-content','max-width':'90%'}">
+                <mat-card-title style="text-align: center;">Hurray!</mat-card-title>
+                <mat-card-content>
+                    You have successfully completed the game. Please upload your team image before the other team does it.
+                </mat-card-content>
+                </mat-card>
         </div>
     </div>
 </div>

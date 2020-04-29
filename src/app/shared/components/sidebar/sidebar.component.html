@@ -18,6 +18,7 @@
     <a mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/quest"><mat-icon>question_answer</mat-icon>Today's Quest</a>
     <a mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/puzzles"><mat-icon>dashboard</mat-icon>Talk to Gramaka</a>
     <a mat-list-item routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/upload-image"><mat-icon>file_upload</mat-icon>Upload Image</a>
+    <a mat-list-item *ngIf="isGameComplete" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="/event-summary"><mat-icon>assignment</mat-icon>Event Summary</a>
 </mat-nav-list>
 </div>
 </div>

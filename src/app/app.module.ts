@@ -29,6 +29,7 @@ import {ErrorInterceptorService} from './error-interceptor.service';
 import { MatTableModule } from '@angular/material/table';
 import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
 import { JwtModule, JwtHelperService,JWT_OPTIONS } from '@auth0/angular-jwt';
+import { EventSummaryComponent } from './pages/event-summary/event-summary.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { JwtModule, JwtHelperService,JWT_OPTIONS } from '@auth0/angular-jwt';
     DefaultComponent,
     TeamInfoComponent,
     AnswerPuzzleComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    EventSummaryComponent
   ],
   imports: [
     BrowserModule,

@@ -10,6 +10,7 @@ import { TeamInfoComponent } from './pages/team-info/team-info.component';
 import { ImageUploadComponent } from './pages/image-upload/image-upload.component';
 import { JWTAuthService } from './jwt-auth.service';
 import { AuthGuardService } from './pages/auth-guard.service';
+import { EventSummaryComponent } from './pages/event-summary/event-summary.component';
 
 
 const routes: Routes = [{
@@ -39,7 +40,11 @@ const routes: Routes = [{
   path: 'upload-image',
   component: ImageUploadComponent,
   canActivate: [AuthGuardService]
-},
+},{
+  path: 'event-summary',
+  component: EventSummaryComponent,
+  canActivate: [AuthGuardService]
+}
 // { path: '**', redirectTo: '' }
 ];
 

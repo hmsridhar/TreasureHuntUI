@@ -7,8 +7,8 @@ import { StateManagementService } from './state-management.service';
 @Injectable({providedIn: 'root'})
 export class BackendServices{
 
-    backendUrl = "http://192.168.113.26:8081";
-    // backendUrl = "http://localhost:8081";
+    // backendUrl = "http://192.168.113.26:8081";
+    backendUrl = "http://localhost:8081";
     pointsEventEmitter = new EventEmitter();
     constructor(private httpClient: HttpClient, private stateMgmtService: StateManagementService){}
     
@@ -28,7 +28,7 @@ export class BackendServices{
                 var data = new userData(userCreds.username,response.headers.get('Authorization'),
                 parseInt(response.headers.get('teamId')),userCreds.username,0,parseInt(response.headers.get('currentDay')),
                 parseInt(response.headers.get('teamDay')),parseInt(response.headers.get('teamStage')),
-                response.headers.get('teamImageUploadStatus'),response.headers.get('hint'));
+                response.headers.get('teamImageUploadStatus'),response.headers.get('hint'),(response.headers.get('gameCompleted')=='true'));
                 localStorage.setItem('Data', JSON.stringify(data));
 
                 this.stateMgmtService.setUsername(data.username);
@@ -138,6 +138,27 @@ export class BackendServices{
     enterNextCity():any{
         return this.httpClient.get(this.backendUrl+"/config/team/"+this.stateMgmtService.getTeamId()+"/enterNextCity",{observe: 'response'})
         .pipe(map(response => response));
+    }
+
+    getQuestionFileNames():any{
+        return this.httpClient.get(this.backendUrl+"/question/"+this.stateMgmtService.getTeamId()+"/filenames",{observe:'response'})
+        .pipe(map(response => response));
+    }
+
+    getPuzzlesWithAnswers():any{
+        return this.httpClient.get(this.backendUrl+"/puzzle/"+this.stateMgmtService.getTeamId()+"/answers",{observe: 'response'})
+        .pipe(map(response => response));
+    }
+
+    getFinalQuestion():any{
+        return this.httpClient.get(this.backendUrl+"/question/"+this.stateMgmtService.getTeamId()+"/finalQuestion",{observe:'response'})
+        .pipe(map(response => response))
+    }
+
+    submitFinalAnswer(ans):any{
+        var answer = new Answer(ans);
+        return this.httpClient.post(this.backendUrl+"/question/"+this.stateMgmtService.getTeamId()+"/finalQuestion",answer,{observe:'response'})
+        .pipe(map(response=>response)) 
     }
 
 }

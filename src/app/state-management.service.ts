@@ -8,8 +8,8 @@ import { map } from 'rxjs/operators';
 @Injectable({providedIn: 'root'})
 export class StateManagementService{
     
-    backendUrl = "http://192.168.113.26:8081";
-    // backendUrl = "http://localhost:8081";
+    // backendUrl = "http://192.168.113.26:8081";
+    backendUrl = "http://localhost:8081";
     username: string;
     teamName: string;
     userType: string;
@@ -21,6 +21,7 @@ export class StateManagementService{
     teamDay: number;
     teamStage: number;
     teamImageUploadStatus: string;
+    gameCompleted: boolean;
 
     constructor(private httpClient: HttpClient){
         if(localStorage.getItem("Data") != undefined){
@@ -35,6 +36,8 @@ export class StateManagementService{
             this.setTeamDay(data.teamDay);
             this.setTeamStage(data.teamStage);
             this.setTeamImageUploadStatus(data.teamImageUploadStatus);
+            this.setGameCompleted(data.gameCompleted);
+            console.log(this.gameCompleted);
         }
     }
 
@@ -49,6 +52,7 @@ export class StateManagementService{
             this.setTeamDay(data.teamDay);
             this.setTeamStage(data.teamStage);
             this.setTeamImageUploadStatus(data.teamImageUploadStatus);
+            this.setGameCompleted(data.gameCompleted);
     }
 
     public refreshUserDetails(){
@@ -108,5 +112,9 @@ export class StateManagementService{
     public setTeamStage(stage: number){ this.teamStage = stage; }
 
     public setTeamImageUploadStatus(status: string){ this.teamImageUploadStatus = status; }
+
+    public setGameCompleted(status: boolean){ this.gameCompleted = status;}
+
+    public getGameCompleted():boolean{ return this.gameCompleted;}
 
 }

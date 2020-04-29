@@ -13,6 +13,7 @@ export class SidebarComponent implements OnInit {
   @Input() score: number;
   keyCount: number = 0;
   subscription: any;
+  isGameComplete = false;
   constructor(private backendService: BackendServices, private stateMgmtService: StateManagementService) { 
     this.keyCount = 0;
     this.subscription = backendService.getPointsEventEmitter().subscribe(event => {
@@ -24,6 +25,7 @@ export class SidebarComponent implements OnInit {
       }
     });
     this.keyCount = this.stateMgmtService.getTeamDay()-1;
+    this.isGameComplete = this.stateMgmtService.getGameCompleted();
   }
 
   ngOnInit(): void {

@@ -1,0 +1,26 @@
+:host{
+    height: 100%;
+    width: 100%;
+}
+.page-div{
+    width: 100%;
+    text-align: center;
+}
+.congrats{
+    display: inline-block;
+    background-color: white;
+    opacity: 0.8;
+    border-radius: 10px;
+    padding: 5px 4px 1px 5px;
+    color: rgb(15, 221, 15);
+    // padding-top: 6px;
+}
+.button{
+    display: inline-block;
+}
+.content{
+    display: inline-block;
+    width: 65%;
+    height: 60%;
+}
+

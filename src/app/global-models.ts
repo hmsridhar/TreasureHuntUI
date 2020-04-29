@@ -9,11 +9,12 @@ export class userData{
     teamDay: number;
     teamStage: number;
     teamImageUploadStatus: string;
+    gameCompleted: boolean;
     hint: string;
 
     constructor(username: string, token: string, teamId: number, teamName: string,
          lastUpdatedScore: number, currentDay: number, teamDay: number,
-         teamStage: number, teamImageUploadStatus: string, hint: string){
+         teamStage: number, teamImageUploadStatus: string, hint: string, gameCompleted: boolean){
        this.username = username; 
        this.token = token;
        this.teamId = teamId;
@@ -24,6 +25,7 @@ export class userData{
        this.teamStage = teamStage;
        this.teamImageUploadStatus = teamImageUploadStatus;
        this.hint = hint;
+       this.gameCompleted = gameCompleted;
     }
 
     public setLastUpdatedScore(score: number): void{
@@ -138,4 +140,16 @@ export class Answer{
 export class PointsEvent{
     type: string;
     score: number;
+}
+
+export class PuzzleWithAnswer{
+    id: number;
+    type: string;
+    question: string;
+    filename: string;
+    answer: string;
+}
+
+export class PuzzleWithAnswerList{
+    list: PuzzleWithAnswer[];
 }

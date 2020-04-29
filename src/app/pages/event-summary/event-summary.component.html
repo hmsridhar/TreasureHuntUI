@@ -1,0 +1,119 @@
+<div class="page-div" style="background-image: url('https://cdna.artstation.com/p/assets/covers/images/006/403/654/large/tue-sander-screenshot00076.jpg?1498331651'); background-position: center-center; height: 100%;">
+    <br>
+    <div class="congrats">
+        <h1>Congratulations!!! You have successfully completed the game</h1>
+    </div><br>
+    <div class="buttons">
+        <button mat-raised-button [color]="detailsColor" (click)="showEventDetails()">Event Details</button>&nbsp;
+        <button mat-raised-button [color]="statsColor" (click)="showEventStats()">Event Stats</button>&nbsp;
+        <button mat-raised-button [color]="answersColor" (click)="showAnswers()">Question,Puzzle Anwers</button>&nbsp;
+        <button mat-raised-button [color]="imagesColor" (click)="showImages()">Team Images</button>&nbsp;
+        <button mat-raised-button [color]="voteColor" (click)="showVoteOfThanks()">Vote of Thanks</button>&nbsp;
+    </div>
+    <div class="content" >
+        <mat-card style="opacity: 0.9;">
+            <mat-card-title>{{title}}</mat-card-title>
+            <mat-card-content>
+                <div *ngIf="title=='Event Details'" style="text-align: left;">
+                    <!-- {{title}} 1 -->
+                    <br>
+                    <ul>
+                        <li>The main purpose of the event was to make the work life more enjoyable and also
+                            to make sure that we are still in touch with each other inspite of working remotely.
+                        </li>
+                        <li>The game had hidden clues everywhere. <br>Most of you might not have observed the naming convention
+                            <ul>
+                                <li>Devipura - Development</li>
+                                <li>Teshwasara - Testing</li>
+                                <li>Operipuram - Dev Ops</li>
+                                <li>Manikyaranya - Management</li>
+                            </ul>
+                            All these together form the GigSky family.<br> A fragment of code traverses this path from the development
+                            to testing to deployment and then to the management, finally reaching to the customer.
+                        </li>
+                        <li>The event was centered around the event GisSky celebrating 10 years since its inception</li>
+                    </ul>
+                </div>
+                <div *ngIf="title=='Event Statistics'" style="text-align: left;">
+                    <!-- {{title}} 2 -->
+                    <ul>
+                        <li>Almost all the employees took part in this event.</li>
+                        <li>Teams(to be changed)</li>
+                        <ul>
+                            <li>Winning Team: </li>
+                            <li>Team that solved the maximum number of puzzles: </li>
+                            <li>Best Team Image: </li>
+                        </ul>
+                        <li>Some Testimonials
+                            <ul>
+                                <li>"I think we are addicted to it :-P"</li>
+                                <li>"It was a really good initiative in this lockdown, to make work life more enjoyable. Also the website is very attractive. Quest & the puzzles are extremely challenging. 
+                                    Very well organized !!"</li>
+                                <li>"Game is nice! 😀 Never though will be so indulging"</li>
+                                <li>"Sure!
+                                    Addictive game"</li>
+                                <li>Nice job with the puzzles</li>
+                                <li>Great work team. elargu manelu bore agirathe. olle event madidri bidi</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div *ngIf="title=='Question, Puzzle Answers'" class="answers">
+                    Click on the right/left most end to move ahead/back or use arrow keys to navigate
+                    <ngb-carousel [showNavigationArrows]="true" 
+                        [showNavigationIndicators]="true"
+                        interval="10000"
+                        [keyboard]="true"
+                        [pauseOnHover]="true"
+                        [wrap]="true">
+                        <ng-template ngbSlide *ngFor="let file of questionFileNames; let i = index">
+                            <div>
+                                <h3 style="background-color: white; color: black; background-color: #FFD700; width: fit-content;">Question {{i+1}}</h3>
+                                <img src="../../../assets/qa/{{file}}" alt="" style="width: 65%;">
+                            </div>
+                        </ng-template>
+                        <ng-template ngbSlide *ngFor="let puzzle of puzzles">
+                            <h3 style="background-color: white; color: black; background-color: #FFD700; width: fit-content;">Puzzle {{puzzle.id}}</h3>
+                            <div *ngIf="puzzle.type==='VOICE'">
+                              <img src="https://elearningbrothers.com/wp-content/uploads/2013/10/edgeaudio-575x405.jpg" style="width: 65%;">
+                            </div>
+                            <div *ngIf="puzzle.type!='VOICE'">
+                                <img src="../../../assets/puzzles/{{puzzle.filename}}" style="max-width: 75%; ">
+                            </div><br><br><br><br>
+                            <div class="carousel-caption">
+                              <audio controls *ngIf="puzzle.type=='VOICE'">
+                                <source src="../../../assets/puzzles/{{puzzle.filename}}">
+                              </audio>
+                              <h1 style="color: black; background-color: white;">{{puzzle.question}}</h1>
+                              <h2 style="color: green; background-color: white;">Answer: {{puzzle.answer}}</h2>
+                                <!-- <button #test mat-raised-button id='{{puzzle.id}}' color="primary" (click)="openDialog(test)" disabled>Answer</button> -->
+                            </div>
+                        </ng-template>
+                    </ngb-carousel>
+                </div>
+                <div *ngIf="title=='Team Images'">
+                    This is how GigSkyians spend the quarantine🤘
+                    <div>
+                        <ngb-carousel>
+                            <ng-template ngbSlide *ngFor="let filename of teamImageFilenames" style="max-width: 30%;">
+                                <img src="../../../assets/teamImages/{{filename}}" style="max-width: 40%;">
+                            </ng-template>
+                        </ngb-carousel>
+                    </div>
+                </div>
+                <div *ngIf="title=='Vote of thanks'" style="text-align: left;">
+                    <br>
+                    We, the fun committee enjoyed more than you in framing questions and puzzles and also learning about developing a web
+application. This event also gave us many memorable moments, which we will surely cherish for a long time
+(for ex. late night discussions).<br>We thank all the kingdoms for actively participating and altogether
+ making the event a enjoyable one.
+ <br><br>
+ Thank you <br>
+ GigSky Fun committee
+ <br><br>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
+
