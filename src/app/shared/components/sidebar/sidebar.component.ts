@@ -25,7 +25,8 @@ export class SidebarComponent implements OnInit {
       }
     });
     this.keyCount = this.stateMgmtService.getTeamDay()-1;
-    this.isGameComplete = this.stateMgmtService.getGameCompleted();
+    if(localStorage.getItem("Data"))
+    this.isGameComplete = JSON.parse(localStorage.getItem("Data")).gameCompleted;
   }
 
   ngOnInit(): void {

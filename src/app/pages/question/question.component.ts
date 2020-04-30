@@ -47,7 +47,8 @@ export class QuestionComponent implements OnInit {
 
   constructor(private stateMgmtService: StateManagementService,
     private backendServices: BackendServices,private router: Router ) { 
-      this.isGameCompleted = this.stateMgmtService.getGameCompleted();
+      // this.isGameCompleted = this.stateMgmtService.getGameCompleted();
+      this.isGameCompleted = JSON.parse(localStorage.getItem("Data")).gameCompleted;
       if(this.isGameCompleted)
         this.showCave = true;
       this.placeholder="";
@@ -273,6 +274,7 @@ export class QuestionComponent implements OnInit {
         this.isGameCompleted = true;
         this.stateMgmtService.refreshUserDetails();
         this.currentImagePath="url('../../assets/day4/final.jpg')";
+        location.reload();
         // this.router.navigate(['event-summary'])
       }else
         alert(response.body.message);
