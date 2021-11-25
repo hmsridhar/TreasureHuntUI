@@ -1,4 +1,9 @@
 # TreasureHunt
+![Screenshot 2021-11-25 at 12 17 48 PM](https://user-images.githubusercontent.com/64017507/143398068-4d20d656-b282-4d49-ac1d-f91044bb3801.png)
+
+
+<img width="720" alt="Screenshot 2021-11-25 at 12 16 07 PM" src="https://user-images.githubusercontent.com/64017507/143397871-f8cd2a2f-7b02-46ab-b72f-e27e8c8bdda5.png">
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.0-next.0.
 
